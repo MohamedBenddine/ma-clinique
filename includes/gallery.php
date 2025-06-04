@@ -11,7 +11,7 @@
             <!-- Gallery Item 1 -->
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
-                    <img src="images/gallery/doc.jpg" class="gallery-image" alt="Professional Medical Team">
+                    <img src="images/new-pics/5.jpg" class="gallery-image" alt="Professional Medical Team">
                     <div class="gallery-overlay">
                         <div class="overlay-content">
                             <h4>Professional Medical Team</h4>
@@ -24,7 +24,7 @@
             <!-- Gallery Item 2 -->
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
-                    <img src="images/gallery/contact.jpg" class="gallery-image" alt="Modern Facilities">
+                    <img src="images/new-pics/6.jpg" class="gallery-image" alt="Modern Facilities">
                     <div class="gallery-overlay">
                         <div class="overlay-content">
                             <h4>Modern Medical Facilities</h4>

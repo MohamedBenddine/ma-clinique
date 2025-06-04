@@ -3,20 +3,24 @@
             <div class="splide__track">
                 <ul class="splide__list">
                     <li class="splide__slide">
-                        <img src="images/slider/home.jpg" class="carouselImage" alt="Medical Facility">
+                        <img src="images/new-pics/1.jpg" class="carouselImage" alt="Medical Facility">
                     </li>
                     <li class="splide__slide">
-                        <img src="images/slider/home3.jpg" class="carouselImage" alt="Healthcare Services">
+                        <img src="images/new-pics/4.jpg" class="carouselImage" alt="Medical Facility">
                     </li>
                     <li class="splide__slide">
-                        <img src="images/slider/home2.jpg" class="carouselImage" alt="Medical Equipment">
+                        <img src="images/new-pics/3.jpg" class="carouselImage" alt="Medical Facility">
                     </li>
                     <li class="splide__slide">
-                        <img src="images/slider/about1.jpg" class="carouselImage" alt="About Our Clinic">
+                        <img src="images/new-pics/5.jpg" class="carouselImage" alt="Medical Facility">
                     </li>
                     <li class="splide__slide">
-                        <img src="images/slider/about2.jpg" class="carouselImage" alt="Medical Team">
+                        <img src="images/new-pics/2.jpg" class="carouselImage" alt="Medical Facility">
                     </li>
+                    <li class="splide__slide">
+                        <img src="images/new-pics/6.jpg" class="carouselImage" alt="Medical Facility">
+                    </li>
+                    
                 </ul>
             </div>
             <div class="carousel-overlay">
