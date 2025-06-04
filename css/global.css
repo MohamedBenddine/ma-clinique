@@ -1,3 +1,185 @@
 .hidden {
-    display: none;
+  display: none;
+}
+
+.main-wrapper {
+  background-color: #f8f8f8;
+}
+
+.splide__slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bg-blue {
+  background-color: #0099ff;
+  /* لون الخلفية الأزرق */
+}
+
+.galleryImage {
+  width: 100%;
+  height: 300px;
+  /* أو أي ارتفاع يناسب التصميم */
+  object-fit: cover;
+  border-radius: 8px;
+  /* اختياري: يجعل الزوايا ناعمة */
+}
+
+.carousel-inner {
+  height: 400px;
+  /* يمكنك تعديله حسب الحاجة */
+  background-color: #000;
+  /* يساعد في ملء الخلفية عند وجود فراغات */
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  /* ✅ عرض الصورة كاملة دون قص */
+}
+
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  /* height: 100%; */
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 2rem;
+}
+
+.heading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main-heading {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3rem;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sub-heading {
+  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.primary-button {
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.primary-button:hover {
+  background-color: #c82333;
+  color: white;
+  text-decoration: none;
+}
+
+.section-padding {
+  padding: 2rem 1rem;
+}
+
+.secondary-button {
+  background-color: #6c757d;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.secondary-button:hover {
+  background-color: #5a6268;
+  color: white;
+  text-decoration: none;
+}
+
+.terms-container {
+  margin-top: auto;
+}
+
+.terms-text {
+  text-align: center;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 300;
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .main-heading {
+    font-size: 2rem;
+  }
+
+  .sub-heading {
+    font-size: 1.25rem;
+  }
+
+  .button-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .primary-button,
+  .secondary-button {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+.splide {
+  position: relative;
+}
+
+.carouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

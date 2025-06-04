@@ -1,4 +1,5 @@
-<footer class="site-footer section-padding" id="contact">
+
+<footer class="site-footer section-padding " id="contact" style="background-color: white;">
             <div class="container">
                 <div class="row">
 

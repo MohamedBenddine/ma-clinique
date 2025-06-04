@@ -106,10 +106,6 @@ a:hover {
   color: var(--primary-color);
 }
 
-.section-padding {
-  padding-top: 7rem;
-  padding-bottom: 7rem;
-}
 
 /*---------------------------------------
   CUSTOM LINK               
@@ -901,10 +897,7 @@ strong {
     font-size: 18px;
   }
 
-  .section-padding {
-    padding-top: 5rem;
-    padding-bottom: 5rem;
-  }
+
 
   .navbar {
     padding-top: 10px;

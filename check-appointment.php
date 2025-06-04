@@ -17,14 +17,12 @@ include('doctor/includes/dbconnection.php');
 
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <link href="css/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <link href="css/owl.carousel.min.css" rel="stylesheet">
-
-    <link href="css/owl.theme.default.min.css" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+        
     <link href="css/templatemo-medic-care.css" rel="stylesheet">
     <script>
         function getdoctors(val) {
