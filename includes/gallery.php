@@ -1,9 +1,15 @@
-<section class="gallery-section section-padding">
+<?php
+require_once 'translations.php';
+$currentLang = getCurrentLang();
+$isRTL = isRTL();
+?>
+
+<section class="gallery-section section-padding" <?php echo $isRTL ? 'dir="rtl"' : 'dir="ltr"'; ?>>
     <div class="container">
         <div class="row">
             <div class="col-12 text-center mb-5">
-                <h2 class="text-white mb-4">Our Medical Gallery</h2>
-                <p class="lead text-white">Take a look at our state-of-the-art facilities and professional team</p>
+                <h2 class="text-white mb-4"><?php echo t('our_medical_gallery'); ?></h2>
+                <p class="lead text-white"><?php echo t('gallery_subtitle'); ?></p>
             </div>
         </div>
         
@@ -11,11 +17,11 @@
             <!-- Gallery Item 1 -->
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
-                    <img src="images/new-pics/5.jpg" class="gallery-image" alt="Professional Medical Team">
+                    <img src="images/new-pics/5.jpg" class="gallery-image" alt="<?php echo t('professional_medical_team'); ?>">
                     <div class="gallery-overlay">
                         <div class="overlay-content">
-                            <h4>Professional Medical Team</h4>
-                            <p>Our experienced doctors providing exceptional healthcare services</p>
+                            <h4><?php echo t('professional_medical_team'); ?></h4>
+                            <p><?php echo t('professional_team_desc'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -24,11 +30,11 @@
             <!-- Gallery Item 2 -->
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
-                    <img src="images/new-pics/6.jpg" class="gallery-image" alt="Modern Facilities">
+                    <img src="images/new-pics/6.jpg" class="gallery-image" alt="<?php echo t('modern_medical_facilities'); ?>">
                     <div class="gallery-overlay">
                         <div class="overlay-content">
-                            <h4>Modern Medical Facilities</h4>
-                            <p>State-of-the-art equipment and comfortable patient areas</p>
+                            <h4><?php echo t('modern_medical_facilities'); ?></h4>
+                            <p><?php echo t('modern_facilities_desc'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -37,11 +43,11 @@
             <!-- Gallery Item 3 -->
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
-                    <img src="images/gallery/about.jpg" class="gallery-image" alt="Patient Care">
+                    <img src="images/gallery/about.jpg" class="gallery-image" alt="<?php echo t('comprehensive_patient_care'); ?>">
                     <div class="gallery-overlay">
                         <div class="overlay-content">
-                            <h4>Comprehensive Patient Care</h4>
-                            <p>Dedicated to providing personalized healthcare solutions</p>
+                            <h4><?php echo t('comprehensive_patient_care'); ?></h4>
+                            <p><?php echo t('patient_care_desc'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -50,11 +56,11 @@
             <!-- Gallery Item 4 -->
             <div class="col-lg-6 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
-                    <img src="images/gallery/about2.jpg" class="gallery-image" alt="Advanced Technology">
+                    <img src="images/gallery/about2.jpg" class="gallery-image" alt="<?php echo t('advanced_medical_technology'); ?>">
                     <div class="gallery-overlay">
                         <div class="overlay-content">
-                            <h4>Advanced Medical Technology</h4>
-                            <p>Latest diagnostic and treatment equipment for accurate results</p>
+                            <h4><?php echo t('advanced_medical_technology'); ?></h4>
+                            <p><?php echo t('advanced_technology_desc'); ?></p>
                         </div>
                     </div>
                 </div>
@@ -140,6 +146,23 @@
     color: white;
 }
 
+/* RTL Support for Gallery */
+[dir="rtl"] .gallery-section h2 {
+    font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+}
+
+[dir="rtl"] .gallery-section .lead {
+    font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+}
+
+[dir="rtl"] .overlay-content h4 {
+    font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+}
+
+[dir="rtl"] .overlay-content p {
+    font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
+}
+
 /* Alternative layout for larger screens */
 @media (min-width: 1200px) {
     .gallery-item {
@@ -187,6 +210,15 @@
 
 .gallery-item:hover::before {
     transform: translateX(100%);
+}
+
+/* RTL Direction adjustments */
+[dir="rtl"] .gallery-item::before {
+    transform: translateX(100%);
+}
+
+[dir="rtl"] .gallery-item:hover::before {
+    transform: translateX(-100%);
 }
 </style>
 

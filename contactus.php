@@ -12,7 +12,7 @@ $isRTL = isRTL();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $currentLang === 'ar' ? 'عيادتي || من نحن' : 'Ma Clinique || About Us'; ?></title>
+    <title><?php echo $currentLang === 'ar' ? 'عيادتي || اتصل بنا' : 'Ma Clinique || Contact Us'; ?></title>
     
     <!-- CSS FILES -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,8 +55,7 @@ $isRTL = isRTL();
         <?php include_once('includes/header.php'); ?>
         
         <?php 
-        $param1 = 'white'; // White background for standalone about page
-        include_once('includes/about.php');
+        include_once('includes/contactus.php');
         ?>
     </main>
 
