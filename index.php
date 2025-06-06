@@ -40,15 +40,15 @@ $carouselDirection = $isRTL ? 'rtl' : 'ltr';
                 perMove: 1,
                 gap: 40,
                 width: "100%",
-                height: "500px",
+                height: "200px",
                 direction: "<?php echo $carouselDirection; ?>",
                 pagination: false,
                 arrows: false,
                 autoScroll: {
-                    pauseOnHover: false,
+                    pauseOnHover: true,
                     pauseOnFocus: false,
                     rewind: false,
-                    speed: 2,
+                    speed: 1.5,
                 },
                 breakpoints: {
                     768: {
@@ -98,7 +98,8 @@ $carouselDirection = $isRTL ? 'rtl' : 'ltr';
     <?php include_once('includes/slideshow.php'); ?>
 
     <?php include_once('includes/immediate.php'); ?>
-
+    
+    <img src="images/assets/wave-haikei-down.svg" alt="mamchatch">
 
 
     <?php include_once('includes/services.php'); ?>
@@ -109,18 +110,19 @@ $carouselDirection = $isRTL ? 'rtl' : 'ltr';
 
 
     <img src="images/assets/wave-up.svg" alt="mamchatch">
-
-        <?php 
+    
+    <?php 
     $param1 = '#0099ff';
     include_once('includes/about.php');
     ?>
     
-     <?php include_once('includes/gallery.php'); ?>
-     <?php include_once('includes/stats.php'); ?>
+    <?php include_once('includes/gallery.php'); ?>
     <img src="images/assets/wave-down.svg" alt="mamchatch">
-
+    
+    <?php include_once('includes/stats.php'); ?>
     <?php include_once('includes/contactus.php'); ?>
-        
+    
+    <img src="images/assets/wave-haikei.svg" alt="mamchatch">
 </main>
 
     <?php include_once('includes/footer.php'); ?>

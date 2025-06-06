@@ -29,7 +29,7 @@ body {
     background: var(--white-color);
     font-family: var(--body-font-family);    
     position: relative;
-    padding-top: 94px;
+    padding-top: 70px;
 }
 
 /*---------------------------------------
@@ -926,7 +926,7 @@ strong {
     width: 320px;
     height: 320px;
   }
-}
+
 
 @media screen and (max-width: 767px) {
   .heroText {

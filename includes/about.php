@@ -17,13 +17,13 @@ $isRTL = isRTL();
                         <?php echo t('about_title'); ?>
                     </h2>
                     
-                    <div class="about-description" style="color: #000;">
+                    <div class="about-description" style="color: #fff;">
                         <p
-                            style="color: #333;"
+                            style="color: <?php echo $backgroundColor == '#0099ff' ? 'white' : '#333'; ?>;"
                         ><strong><?php echo t('mission_statement'); ?></strong></p>
                         <br>
                         <p
-                            style="color: #333;"
+                            style="color: <?php echo $backgroundColor == '#0099ff' ? 'white' : '#333'; ?>;"
                         ><?php echo t('mission_description'); ?></p>
                     </div>
                     
@@ -51,9 +51,7 @@ $isRTL = isRTL();
                         <a href="#contact-us" class="btn btn-cta <?php echo $isRTL ? 'ms-3' : 'me-3'; ?>" style="<?php echo $backgroundColor == '#0099ff' ? 'background: white; color: #0099ff; border: 2px solid white;' : 'background: #0099ff; color: white; border: 2px solid #0099ff;'; ?>">
                             <i class="bi bi-calendar-check"></i> <?php echo t('book_appointment'); ?>
                         </a>
-                        <a href="tel:+213555123456" class="btn btn-outline-cta" style="<?php echo $backgroundColor == '#0099ff' ? 'border: 2px solid white; color: white;' : 'border: 2px solid #0099ff; color: #0099ff;'; ?>">
-                            <i class="bi bi-telephone"></i> <?php echo t('call_now'); ?>
-                        </a>
+                      
                     </div>
                 </div>
             </div>

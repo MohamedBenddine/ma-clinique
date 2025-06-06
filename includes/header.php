@@ -24,7 +24,7 @@ $isRTL = isRTL();
             <!-- Language Selector -->
             <div class="language-selector <?php echo $isRTL ? 'me-auto ms-3' : 'ms-auto me-3'; ?>">
                 <button class="language-btn" onclick="changeLanguage()">
-                    <?php echo $currentLang === 'ar' ? '🇸🇦 AR' : '🇺🇸 EN'; ?>
+                    <?php echo $currentLang === 'ar' ? 'AR' : 'EN'; ?>
                 </button>
             </div>
 
@@ -66,7 +66,7 @@ $isRTL = isRTL();
 <style>
 /* Simple Navbar */
 .navbar-custom {
-    background: white;
+    background: #0099ff;
     transition: all 0.3s ease;
     padding: 1rem 0;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
@@ -80,7 +80,7 @@ $isRTL = isRTL();
 
 /* Brand */
 .navbar-brand {
-    color: #0099ff !important;
+    color: white !important;
     font-weight: 700;
     text-decoration: none;
 }
@@ -96,7 +96,7 @@ $isRTL = isRTL();
 
 .brand-tagline {
     font-size: 0.7rem;
-    color: #666;
+    color: white !important;
 }
 
 .navbar-custom.scrolled .brand-tagline {
@@ -105,14 +105,14 @@ $isRTL = isRTL();
 
 /* Navigation Links */
 .nav-link-custom {
-    color: #333 !important;
+    color: white !important;
     font-weight: 500;
     padding: 0.5rem 1rem !important;
     transition: all 0.3s ease;
 }
 
 .nav-link-custom:hover {
-    color: #0099ff !important;
+    color: #ffd700 !important;
 }
 
 .navbar-custom.scrolled .nav-link-custom {
@@ -125,12 +125,12 @@ $isRTL = isRTL();
 
 /* Doctor Login */
 .doctor-login {
-    color: #0099ff !important;
+    color: #ffd700 !important;
     font-weight: 600;
 }
 
 .doctor-login:hover {
-    color: #0077cc !important;
+    color: white !important;
 }
 
 .navbar-custom.scrolled .doctor-login {
@@ -143,7 +143,7 @@ $isRTL = isRTL();
 
 /* Simple Language Button */
 .language-btn {
-    background: none;
+    background: white;
     border: 2px solid #0099ff;
     color: #0099ff;
     padding: 0.4rem 0.8rem;
@@ -156,11 +156,13 @@ $isRTL = isRTL();
 
 .language-btn:hover {
     background: #0099ff;
+    border-color: white;
     color: white;
 }
 
 .navbar-custom.scrolled .language-btn {
     border-color: white;
+    background: transparent;
     color: white;
 }
 

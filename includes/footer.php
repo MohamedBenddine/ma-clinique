@@ -168,7 +168,7 @@ $isRTL = isRTL();
 
 <style>
 .site-footer {
-    background: linear-gradient(135deg, #0099ff 0%, #0077cc 100%);
+    background:  #0099ff ;
     color: white;
     position: relative;
     overflow: hidden;

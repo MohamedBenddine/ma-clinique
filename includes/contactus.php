@@ -328,7 +328,7 @@ $isRTL = isRTL();
 }
 
 .btn-primary {
-    background: linear-gradient(45deg, #0099ff, #0077cc);
+    background: #0099ff;
     border: none;
     border-radius: 50px;
     padding: 12px 30px;
@@ -338,7 +338,8 @@ $isRTL = isRTL();
 
 .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 153, 255, 0.4);
+    /* box-shadow: 0 5px 15px rgba(0, 153, 255, 0.4); */
+    background: #0099ff;
 }
 
 .alert-success {

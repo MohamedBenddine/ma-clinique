@@ -15,7 +15,7 @@ $isRTL = isRTL();
         
         <div class="row">
             <!-- Gallery Item 1 -->
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
                     <img src="images/new-pics/5.jpg" class="gallery-image" alt="<?php echo t('professional_medical_team'); ?>">
                     <div class="gallery-overlay">
@@ -28,7 +28,7 @@ $isRTL = isRTL();
             </div>
 
             <!-- Gallery Item 2 -->
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
                     <img src="images/new-pics/6.jpg" class="gallery-image" alt="<?php echo t('modern_medical_facilities'); ?>">
                     <div class="gallery-overlay">
@@ -41,7 +41,7 @@ $isRTL = isRTL();
             </div>
 
             <!-- Gallery Item 3 -->
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
                     <img src="images/gallery/about.jpg" class="gallery-image" alt="<?php echo t('comprehensive_patient_care'); ?>">
                     <div class="gallery-overlay">
@@ -54,7 +54,7 @@ $isRTL = isRTL();
             </div>
 
             <!-- Gallery Item 4 -->
-            <div class="col-lg-6 col-md-6 col-12 mb-4">
+            <div class="col-lg-3 col-md-6 col-12 mb-4">
                 <div class="gallery-item">
                     <img src="images/gallery/about2.jpg" class="gallery-image" alt="<?php echo t('advanced_medical_technology'); ?>">
                     <div class="gallery-overlay">
@@ -71,22 +71,22 @@ $isRTL = isRTL();
 
 <style>
 .gallery-section {
-    background: linear-gradient(135deg, #0099ff 0%, #0077cc 100%);
+    background: #0099ff;
     overflow: hidden;
 }
 
 .gallery-item {
     position: relative;
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     transition: all 0.3s ease;
-    height: 300px;
+    height: 250px;
 }
 
 .gallery-item:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .gallery-image {
@@ -97,7 +97,8 @@ $isRTL = isRTL();
 }
 
 .gallery-item:hover .gallery-image {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    filter: brightness(0.6);
 }
 
 .gallery-overlay {
@@ -106,13 +107,13 @@ $isRTL = isRTL();
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(45deg, rgba(0, 153, 255, 0.9), rgba(0, 119, 204, 0.9));
+    background: rgba(0, 153, 255, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: all 0.3s ease;
-    border-radius: 20px;
+    border-radius: 15px;
 }
 
 .gallery-item:hover .gallery-overlay {
@@ -122,7 +123,7 @@ $isRTL = isRTL();
 .overlay-content {
     text-align: center;
     color: white;
-    padding: 2rem;
+    padding: 1.5rem;
     transform: translateY(20px);
     transition: all 0.3s ease;
 }
@@ -132,18 +133,18 @@ $isRTL = isRTL();
 }
 
 .overlay-content h4 {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.1rem;
+    font-weight: 600;
     margin-bottom: 0.5rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     color: white;
+    line-height: 1.3;
 }
 
 .overlay-content p {
-    font-size: 1rem;
-    line-height: 1.5;
+    font-size: 0.85rem;
+    line-height: 1.4;
     margin-bottom: 0;
-    color: white;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* RTL Support for Gallery */
@@ -163,29 +164,55 @@ $isRTL = isRTL();
     font-family: 'Cairo', 'Tajawal', Arial, sans-serif;
 }
 
-/* Alternative layout for larger screens */
-@media (min-width: 1200px) {
+/* Responsive Design */
+@media (max-width: 992px) {
     .gallery-item {
-        height: 350px;
+        height: 220px;
+    }
+    
+    .overlay-content h4 {
+        font-size: 1rem;
+    }
+    
+    .overlay-content p {
+        font-size: 0.8rem;
     }
 }
 
 @media (max-width: 768px) {
     .gallery-item {
-        height: 250px;
+        height: 200px;
         margin-bottom: 1.5rem;
     }
     
+    .overlay-content {
+        padding: 1.2rem;
+    }
+    
     .overlay-content h4 {
-        font-size: 1.25rem;
+        font-size: 0.95rem;
     }
     
     .overlay-content p {
-        font-size: 0.9rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .gallery-item {
+        height: 180px;
     }
     
     .overlay-content {
-        padding: 1.5rem;
+        padding: 1rem;
+    }
+    
+    .overlay-content h4 {
+        font-size: 0.9rem;
+    }
+    
+    .overlay-content p {
+        font-size: 0.7rem;
     }
 }
 
@@ -194,31 +221,14 @@ $isRTL = isRTL();
     background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
 }
 
-/* Hover effect enhancement */
-.gallery-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-    transform: translateX(-100%);
-    transition: transform 0.6s ease;
-    z-index: 1;
-}
-
-.gallery-item:hover::before {
-    transform: translateX(100%);
+.gallery-item:hover::after {
+    opacity: 0.8;
 }
 
 /* RTL Direction adjustments */
-[dir="rtl"] .gallery-item::before {
-    transform: translateX(100%);
-}
-
-[dir="rtl"] .gallery-item:hover::before {
-    transform: translateX(-100%);
+[dir="rtl"] .gallery-item::after {
+    right: auto;
+    left: 1rem;
 }
 </style>
 
@@ -235,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
             item.style.transition = 'all 0.6s ease';
             item.style.opacity = '1';
             item.style.transform = 'translateY(0)';
-        }, index * 200);
+        }, index * 150);
     });
 });
 
