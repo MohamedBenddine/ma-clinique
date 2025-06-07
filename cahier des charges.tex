@@ -1,0 +1,846 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+
+% Page geometry
+\geometry{
+    left=2.5cm,
+    right=2.5cm,
+    top=3cm,
+    bottom=3cm
+}
+
+% Colors
+\definecolor{primaryblue}{RGB}{0,153,255}
+\definecolor{darkblue}{RGB}{0,102,204}
+\definecolor{lightgray}{RGB}{245,245,245}
+\definecolor{black}{RGB}{0,0,0}
+
+% Header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{black}{\textbf{Cahier des Charges - Ma Clinique}}}
+\fancyhead[R]{\thepage}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\color{black}\leaders\hrule height \headrulewidth\hfill}}
+
+% Title formatting
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries\color{darkblue}}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{primaryblue}}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{darkblue}}
+{\thesubsection}{1em}{}
+
+% Hyperref setup
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=magenta,      
+    urlcolor=primaryblue,
+    citecolor=darkblue
+}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+    \centering
+    \vspace*{2cm}
+    
+    \textcolor{primaryblue}{\textbf{\Huge Cahier des Charges}}
+    
+    \vspace{1cm}
+    
+    \textcolor{darkblue}{\textbf{\LARGE Application Web de Prise de Rendez-vous Médicaux}}
+    
+    \vspace{0.5cm}
+    
+    \textcolor{primaryblue}{\textbf{\Large "Ma Clinique"}}
+    
+    \vspace{3cm}
+    
+    \begin{tabular}{|p{4cm}|p{8cm}|}
+        \hline
+        \textbf{Projet} & Application de gestion des rendez-vous médicaux \\
+        \hline
+        \textbf{Version} & 1.0 \\
+        \hline
+        \textbf{Date} & \today \\
+        \hline
+        \textbf{Auteur} & [Votre Nom] \\
+        \hline
+        \textbf{Encadrant} & [Nom de l'encadrant] \\
+        \hline
+        \textbf{Institution} & [Nom de l'institution] \\
+        \hline
+    \end{tabular}
+    
+    \vfill
+    
+    \textcolor{darkblue}{\textbf{\large Année Universitaire 2023-2024}}
+\end{titlepage}
+
+% Résumé / Abstract
+\chapter*{Résumé}
+\addcontentsline{toc}{chapter}{Résumé}
+
+\section*{Français}
+Ce projet présente le développement d'une application web pour la prise de rendez-vous médicaux intitulée "Ma Clinique". L'objectif principal est de réduire les longues files d'attente dans les hôpitaux et d'améliorer l'accès aux soins de santé pour les populations vivant dans les zones rurales. L'application permet aux patients de consulter les disponibilités des médecins et de réserver des créneaux horaires convenables. Elle offre également aux médecins un système efficace de gestion des rendez-vous.
+
+Le système utilise une architecture web moderne basée sur PHP, MySQL et Bootstrap, avec un support multilingue (français/arabe) pour assurer une meilleure accessibilité. Les fonctionnalités principales incluent la prise de rendez-vous en ligne, la vérification du statut des rendez-vous, la gestion des plannings médicaux et un tableau de bord complet pour les professionnels de santé.
+
+Cette solution contribue à la digitalisation du secteur de la santé et améliore l'efficacité organisationnelle des établissements médicaux tout en réduisant la charge administrative.
+
+\section*{English}
+This project introduces the development of a web application for medical appointment booking called "Ma Clinique". The main objective is to reduce long queues in hospitals and improve healthcare access for people living in rural areas. The application allows patients to view doctors' availability and book convenient time slots. It also provides doctors with an efficient appointment management system.
+
+The system uses a modern web architecture based on PHP, MySQL, and Bootstrap, with multilingual support (French/Arabic) to ensure better accessibility. Main features include online appointment booking, appointment status verification, medical schedule management, and a comprehensive dashboard for healthcare professionals.
+
+This solution contributes to the digitalization of the healthcare sector and improves organizational efficiency of medical facilities while reducing administrative burden.
+
+\section*{العربية}
+يقدم هذا المشروع تطوير تطبيق ويب لحجز المواعيد الطبية يسمى "عيادتي". الهدف الرئيسي هو تقليل الطوابير الطويلة في المستشفيات وتحسين الوصول إلى الرعاية الصحية للأشخاص الذين يعيشون في المناطق الريفية. يتيح التطبيق للمرضى عرض توفر الأطباء وحجز الأوقات المناسبة. كما يوفر للأطباء نظام إدارة فعال للمواعيد.
+
+يستخدم النظام هيكل ويب حديث يعتمد على PHP و MySQL و Bootstrap، مع دعم متعدد اللغات (الفرنسية/العربية) لضمان إمكانية وصول أفضل. تشمل الميزات الرئيسية حجز المواعيد عبر الإنترنت، والتحقق من حالة المواعيد، وإدارة الجداول الطبية، ولوحة تحكم شاملة للمهنيين الصحيين.
+
+تساهم هذه الحلول في رقمنة قطاع الرعاية الصحية وتحسين الكفاءة التنظيمية للمرافق الطبية مع تقليل العبء الإداري.
+
+% Table of contents
+\tableofcontents
+
+% Liste des figures
+\listoffigures
+
+% Liste des tableaux
+\listoftables
+
+\newpage
+
+\chapter{Introduction}
+
+\section{Contexte du projet}
+
+Dans un monde de plus en plus digitalisé, les services de santé doivent s'adapter aux nouvelles technologies pour améliorer l'efficacité et l'accessibilité des soins. La gestion traditionnelle des rendez-vous médicaux, basée sur les appels téléphoniques et les visites en personne, présente de nombreux défis, particulièrement dans les zones rurales où l'accès aux soins de santé est limité.
+
+Le projet "Ma Clinique" s'inscrit dans cette démarche de modernisation du secteur de la santé en proposant une solution web innovante pour la prise de rendez-vous médicaux. Cette application vise à simplifier et optimiser le processus de réservation, tant pour les patients que pour les professionnels de santé.
+
+\section{Problématique}
+
+Le système de santé actuel fait face à plusieurs défis majeurs :
+\begin{itemize}
+    \item Longues files d'attente dans les établissements de santé
+    \item Difficultés d'accès aux soins pour les populations rurales
+    \item Gestion inefficace des plannings médicaux
+    \item Taux élevé de rendez-vous manqués
+    \item Surcharge administrative du personnel médical
+    \item Communication limitée entre patients et médecins
+\end{itemize}
+
+\section{Solution proposée}
+
+L'application web "Ma Clinique" propose une plateforme complète de gestion des rendez-vous médicaux qui permet :
+\begin{itemize}
+    \item La prise de rendez-vous en ligne 24h/24
+    \item La visualisation en temps réel des disponibilités
+    \item La gestion automatisée des plannings
+    \item Le suivi des rendez-vous pour les patients
+    \item Un tableau de bord complet pour les médecins
+    \item Support multilingue (français/arabe)
+\end{itemize}
+
+\section{Portée}
+
+\subsection{Portée du projet}
+Ce projet couvre les aspects suivants :
+\begin{itemize}
+    \item Développement d'une interface web pour la prise de rendez-vous
+    \item Création d'un système de gestion pour les médecins
+    \item Implémentation d'une base de données pour stocker les informations
+    \item Développement d'un système multilingue (français/arabe)
+    \item Création d'interfaces responsive pour différents appareils
+    \item Mise en place de mesures de sécurité de base
+    \item Documentation utilisateur et technique
+\end{itemize}
+
+\subsection{Hors portée}
+Les éléments suivants ne sont pas inclus dans cette version :
+\begin{itemize}
+    \item Système de paiement en ligne
+    \item Notifications par SMS ou email automatiques
+    \item Application mobile native
+    \item Téléconsultation intégrée
+    \item Intégration avec des systèmes hospitaliers existants
+    \item Dossier médical électronique complet
+    \item Système de rappel automatique
+\end{itemize}
+
+\chapter{Analyse du Système}
+
+\section{Description du problème}
+
+Le système de santé dans plusieurs régions, notamment les zones rurales, souffre d'une mauvaise gestion des rendez-vous médicaux. Les patients doivent souvent se déplacer pour prendre un rendez-vous, ce qui peut être contraignant et inefficace. Cela engendre des files d'attente interminables, des retards, voire des pertes de rendez-vous. De plus, les ressources médicales ne sont pas utilisées de manière optimale, ce qui affecte la qualité des soins.
+
+Face à ce constat, il devient essentiel de mettre en place une solution qui facilite la prise de rendez-vous à distance et qui améliore la coordination entre patients et professionnels de santé.
+
+\section{Objectifs du projet}
+
+\subsection{Objectifs principaux}
+\begin{itemize}
+    \item Réduire les files d'attente dans les centres de santé
+    \item Faciliter la prise de rendez-vous pour les patients, notamment ceux vivant dans les zones rurales
+    \item Offrir aux médecins un outil de gestion des rendez-vous simple et efficace
+    \item Améliorer l'organisation globale des consultations médicales
+    \item Réduire les rendez-vous manqués (no-shows) grâce à des rappels automatiques
+\end{itemize}
+
+\subsection{Objectifs secondaires}
+\begin{itemize}
+    \item Digitaliser le processus de prise de rendez-vous
+    \item Améliorer la satisfaction des patients
+    \item Optimiser l'utilisation des ressources médicales
+    \item Fournir des statistiques pour améliorer la gestion
+    \item Assurer une interface multilingue pour une meilleure accessibilité
+\end{itemize}
+
+\section{Public cible}
+
+\subsection{Utilisateurs principaux}
+\begin{itemize}
+    \item \textbf{Les patients} : toute personne souhaitant prendre rendez-vous chez un médecin de manière rapide et pratique
+    \item \textbf{Les médecins} : professionnels de santé cherchant à mieux gérer leur planning de consultations
+    \item \textbf{Les secrétaires médicaux} : personnel administratif en charge de l'organisation des rendez-vous
+\end{itemize}
+
+\subsection{Bénéficiaires indirects}
+\begin{itemize}
+    \item Établissements de santé
+    \item Système de santé publique
+    \item Familles des patients
+\end{itemize}
+
+\section{Contraintes Générales}
+
+\subsection{Contraintes techniques}
+\begin{itemize}
+    \item Utilisation obligatoire de technologies web standard (HTML, CSS, JavaScript, PHP)
+    \item Compatibilité avec les navigateurs modernes (Chrome, Firefox, Safari, Edge)
+    \item Base de données MySQL pour la compatibilité avec l'environnement XAMPP
+    \item Hébergement sur serveur Apache
+    \item Respect des standards d'accessibilité web
+    \item Support UTF-8 obligatoire pour les caractères arabes
+\end{itemize}
+
+\subsection{Contraintes de sécurité}
+\begin{itemize}
+    \item Protection des données personnelles des patients
+    \item Authentification sécurisée pour les médecins
+    \item Validation de toutes les entrées utilisateur
+    \item Protection contre les injections SQL
+    \item Gestion sécurisée des sessions utilisateur
+\end{itemize}
+
+\subsection{Contraintes d'interface}
+\begin{itemize}
+    \item Interface utilisateur intuitive et accessible
+    \item Support obligatoire des langues française et arabe
+    \item Design responsive pour mobile et desktop
+    \item Temps de chargement des pages inférieur à 3 secondes
+    \item Conformité aux standards d'ergonomie web
+\end{itemize}
+
+\subsection{Contraintes organisationnelles}
+\begin{itemize}
+    \item Développement en équipe réduite (1-2 développeurs)
+    \item Budget limité (projet académique)
+    \item Délai de développement de 12 semaines maximum
+    \item Documentation obligatoire en français
+    \item Tests utilisateur requis avant déploiement
+\end{itemize}
+
+\section{Hypothèses et Dépendances}
+
+\subsection{Hypothèses}
+\begin{itemize}
+    \item Les utilisateurs disposent d'une connexion Internet stable
+    \item Les médecins sont familiers avec l'utilisation d'outils informatiques de base
+    \item Les patients acceptent de fournir leurs informations personnelles
+    \item L'infrastructure serveur est disponible et fiable
+    \item Les données des spécialisations et médecins sont fournies au début du projet
+    \item Les utilisateurs utilisent des navigateurs compatibles avec HTML5
+\end{itemize}
+
+\subsection{Dépendances externes}
+\begin{itemize}
+    \item Disponibilité du serveur XAMPP pour le développement
+    \item Accès à une base de données MySQL fonctionnelle
+    \item Disponibilité des bibliothèques Bootstrap et jQuery
+    \item Fourniture des données initiales (médecins, spécialisations)
+    \item Validation par les parties prenantes (médecins, patients tests)
+    \item Approbation des interfaces par l'équipe projet
+\end{itemize}
+
+\subsection{Dépendances internes}
+\begin{itemize}
+    \item Finalisation de la conception de la base de données
+    \item Validation des maquettes d'interface utilisateur
+    \item Implémentation du système de traduction
+    \item Tests de compatibilité navigateur réussis
+    \item Formation des utilisateurs finaux (médecins)
+\end{itemize}
+
+\chapter{Spécifications Fonctionnelles}
+
+\section{Fonctionnalités pour les patients}
+
+\subsection{Gestion des rendez-vous}
+\begin{itemize}
+    \item Prise de rendez-vous en ligne
+    \item Consultation des créneaux disponibles
+    \item Sélection du médecin par spécialité
+    \item Consultation de l'historique des rendez-vous
+    \item Vérification du statut des rendez-vous
+    \item Impression du ticket de rendez-vous
+\end{itemize}
+
+\subsection{Interface utilisateur}
+\begin{itemize}
+    \item Interface responsive adaptée aux différents appareils
+    \item Support multilingue (français/arabe)
+    \item Navigation intuitive et accessible
+    \item Formulaires de saisie validés
+    \item Messages d'erreur et de confirmation clairs
+\end{itemize}
+
+\section{Fonctionnalités pour les médecins}
+
+\subsection{Gestion des rendez-vous}
+\begin{itemize}
+    \item Visualisation du planning quotidien/hebdomadaire
+    \item Consultation des détails des rendez-vous
+    \item Mise à jour du statut des rendez-vous (approuvé/annulé)
+    \item Ajout de remarques pour chaque rendez-vous
+    \item Gestion des nouveaux rendez-vous
+\end{itemize}
+
+\subsection{Fonctionnalités administratives}
+\begin{itemize}
+    \item Tableau de bord avec statistiques
+    \item Gestion du profil médecin
+    \item Recherche dans les rendez-vous
+    \item Génération de rapports entre dates
+    \item Authentification sécurisée
+\end{itemize}
+
+\section{Fonctionnalités système}
+
+\subsection{Gestion des données}
+\begin{itemize}
+    \item Stockage sécurisé des informations patients
+    \item Gestion des spécialisations médicales
+    \item Historique complet des actions
+    \item Sauvegarde automatique des données
+\end{itemize}
+
+\subsection{Sécurité et performance}
+\begin{itemize}
+    \item Chiffrement des données sensibles
+    \item Validation des entrées utilisateur
+    \item Gestion des sessions utilisateur
+    \item Optimisation des performances
+    \item Encodage UTF-8 pour le support multilingue
+\end{itemize}
+
+\section{Exigences Non-Fonctionnelles}
+
+\subsection{Performance}
+\begin{itemize}
+    \item Temps de réponse maximum de 3 secondes pour toute page
+    \item Support de 50 utilisateurs simultanés minimum
+    \item Temps de chargement initial inférieur à 5 secondes
+    \item Optimisation des requêtes base de données
+    \item Mise en cache des données statiques
+\end{itemize}
+
+\subsection{Fiabilité}
+\begin{itemize}
+    \item Disponibilité du système à 99\% (hors maintenance)
+    \item Récupération automatique en cas d'erreur système
+    \item Sauvegarde quotidienne des données
+    \item Logs détaillés des erreurs et actions utilisateur
+    \item Mécanisme de rollback en cas de problème
+\end{itemize}
+
+\subsection{Utilisabilité}
+\begin{itemize}
+    \item Interface intuitive nécessitant moins de 10 minutes de formation
+    \item Navigation cohérente sur toutes les pages
+    \item Messages d'aide contextuelle
+    \item Conformité aux standards d'accessibilité WCAG 2.1
+    \item Support clavier complet pour la navigation
+\end{itemize}
+
+\subsection{Sécurité}
+\begin{itemize}
+    \item Chiffrement des mots de passe avec algorithme sécurisé
+    \item Sessions utilisateur avec timeout automatique
+    \item Protection contre les attaques XSS et CSRF
+    \item Validation stricte de toutes les entrées utilisateur
+    \item Logs d'audit pour les actions sensibles
+\end{itemize}
+
+\subsection{Compatibilité}
+\begin{itemize}
+    \item Support des navigateurs Chrome, Firefox, Safari, Edge (dernières versions)
+    \item Compatibilité mobile (responsive design)
+    \item Support des écrans de 320px à 1920px de largeur
+    \item Compatibilité avec les lecteurs d'écran
+    \item Support des systèmes Windows, macOS, Linux
+\end{itemize}
+
+\subsection{Maintenabilité}
+\begin{itemize}
+    \item Code source documenté et commenté
+    \item Architecture modulaire pour faciliter les modifications
+    \item Séparation claire entre présentation, logique et données
+    \item Tests unitaires pour les fonctions critiques
+    \item Documentation technique complète
+\end{itemize}
+
+\subsection{Scalabilité}
+\begin{itemize}
+    \item Architecture permettant l'ajout de nouvelles fonctionnalités
+    \item Base de données optimisée pour la croissance
+    \item Code réutilisable et extensible
+    \item Possibilité d'ajout de nouvelles langues
+    \item Support de l'augmentation du nombre d'utilisateurs
+\end{itemize}
+
+\chapter{Spécifications Techniques}
+
+\section{Architecture technique}
+
+\subsection{Architecture générale}
+L'application suit une architecture 3-tiers :
+\begin{itemize}
+    \item \textbf{Couche présentation} : Interface utilisateur web responsive
+    \item \textbf{Couche logique métier} : Traitement des données en PHP
+    \item \textbf{Couche données} : Base de données MySQL
+\end{itemize}
+
+\subsection{Technologies utilisées}
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Couche} & \textbf{Technologie} & \textbf{Description} \\
+\hline
+Frontend & HTML5, CSS3, JavaScript & Interface utilisateur responsive \\
+\hline
+Backend & PHP 7.4+ & Logique métier et traitement \\
+\hline
+Base de données & MySQL 8.0+ & Stockage des données \\
+\hline
+Framework CSS & Bootstrap 5.3.6 & Design responsive \\
+\hline
+Serveur web & Apache/Nginx & Serveur HTTP \\
+\hline
+Outils & jQuery, Bootstrap Icons & Bibliothèques JavaScript et icônes \\
+\hline
+\end{tabular}
+\caption{Stack technologique}
+\end{table}
+
+\section{Modèle de données}
+
+\subsection{Principales entités}
+\begin{itemize}
+    \item \textbf{tblappointment} : Gestion des rendez-vous
+    \item \textbf{tbldoctor} : Informations des médecins
+    \item \textbf{tblspecialization} : Spécialisations médicales
+\end{itemize}
+
+\subsection{Champs principaux}
+\begin{longtable}{|p{3cm}|p{4cm}|p{6cm}|}
+\hline
+\textbf{Table} & \textbf{Champ} & \textbf{Description} \\
+\hline
+\endhead
+
+tblappointment & AppointmentNumber & Numéro unique de rendez-vous \\
+\hline
+& Name & Nom du patient \\
+\hline
+& MobileNumber & Numéro de téléphone \\
+\hline
+& Email & Adresse e-mail \\
+\hline
+& AppointmentDate & Date du rendez-vous \\
+\hline
+& Status & Statut (Pending/Approved/Cancelled) \\
+\hline
+& Remark & Remarques du médecin \\
+\hline
+
+tbldoctor & FullName & Nom complet du médecin \\
+\hline
+& Email & Adresse e-mail \\
+\hline
+& MobileNumber & Numéro de téléphone \\
+\hline
+& Specialization & ID de la spécialisation \\
+\hline
+& Password & Mot de passe chiffré \\
+\hline
+
+tblspecialization & Specialization & Nom de la spécialisation \\
+\hline
+\caption{Structure des données principales}
+\end{longtable}
+
+\section{Exigences système}
+
+\subsection{Serveur}
+\begin{itemize}
+    \item PHP 7.4 ou supérieur
+    \item MySQL 8.0 ou supérieur
+    \item Apache 2.4 ou Nginx
+    \item Extension PDO pour PHP
+    \item Support UTF-8
+\end{itemize}
+
+\subsection{Client}
+\begin{itemize}
+    \item Navigateur web moderne (Chrome, Firefox, Safari, Edge)
+    \item JavaScript activé
+    \item Connexion Internet stable
+    \item Résolution minimum 320px (mobile)
+\end{itemize}
+
+\chapter{Conception}
+
+\section{Diagrammes UML}
+
+\subsection{Diagramme de cas d'utilisation}
+% Espace réservé pour le diagramme de cas d'utilisation
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{8cm} [Insérer le diagramme de cas d'utilisation ici] \vspace{8cm}}}
+    \caption{Diagramme de cas d'utilisation}
+    \label{fig:use-case}
+\end{figure}
+
+\subsection{Diagramme de classes}
+% Espace réservé pour le diagramme de classes
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{8cm} [Insérer le diagramme de classes ici] \vspace{8cm}}}
+    \caption{Diagramme de classes}
+    \label{fig:class-diagram}
+\end{figure}
+
+\subsection{Diagramme de séquence}
+% Espace réservé pour le diagramme de séquence
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{8cm} [Insérer le diagramme de séquence ici] \vspace{8cm}}}
+    \caption{Diagramme de séquence - Prise de rendez-vous}
+    \label{fig:sequence-diagram}
+\end{figure}
+
+\chapter{Interface Utilisateur}
+
+\section{Captures d'écran de l'application}
+
+\subsection{Interface patient}
+
+\subsubsection{Page d'accueil}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran de la page d'accueil] \vspace{6cm}}}
+    \caption{Page d'accueil de l'application}
+    \label{fig:homepage}
+\end{figure}
+
+\subsubsection{Formulaire de prise de rendez-vous}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran du formulaire de booking] \vspace{6cm}}}
+    \caption{Formulaire de prise de rendez-vous}
+    \label{fig:booking-form}
+\end{figure}
+
+\subsubsection{Ticket de confirmation}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran du ticket] \vspace{6cm}}}
+    \caption{Ticket de confirmation de rendez-vous}
+    \label{fig:ticket}
+\end{figure}
+
+\subsubsection{Vérification de rendez-vous}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran de la page de vérification] \vspace{6cm}}}
+    \caption{Page de vérification des rendez-vous}
+    \label{fig:check-appointment}
+\end{figure}
+
+\subsection{Interface médecin}
+
+\subsubsection{Tableau de bord médecin}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran du dashboard médecin] \vspace{6cm}}}
+    \caption{Tableau de bord médecin}
+    \label{fig:doctor-dashboard}
+\end{figure}
+
+\subsubsection{Gestion des rendez-vous}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran de la gestion des rendez-vous] \vspace{6cm}}}
+    \caption{Interface de gestion des rendez-vous}
+    \label{fig:appointment-management}
+\end{figure}
+
+\subsubsection{Détails d'un rendez-vous}
+% Espace réservé pour capture d'écran
+\begin{figure}[H]
+    \centering
+    \fbox{\parbox{12cm}{\centering \vspace{6cm} [Insérer capture d'écran des détails de rendez-vous] \vspace{6cm}}}
+    \caption{Détails d'un rendez-vous}
+    \label{fig:appointment-details}
+\end{figure}
+
+\section{Design et ergonomie}
+
+\subsection{Principes de design}
+\begin{itemize}
+    \item Interface épurée et professionnelle
+    \item Navigation intuitive
+    \item Design responsive pour tous les appareils
+    \item Accessibilité pour les utilisateurs handicapés
+    \item Support RTL pour la langue arabe
+\end{itemize}
+
+\subsection{Charte graphique}
+\begin{itemize}
+    \item Couleur principale : Bleu médical (\#0099ff)
+    \item Couleurs secondaires : Blanc, gris clair
+    \item Typographie : Open Sans (latin), Cairo (arabe)
+    \item Icônes : Bootstrap Icons
+\end{itemize}
+
+\chapter{Sécurité et Qualité}
+
+\section{Mesures de sécurité}
+
+\subsection{Sécurité des données}
+\begin{itemize}
+    \item Chiffrement des mots de passe (MD5/hash)
+    \item Validation des entrées utilisateur
+    \item Protection contre les injections SQL (PDO)
+    \item Gestion sécurisée des sessions
+    \item Encodage UTF-8 pour éviter les problèmes de caractères
+\end{itemize}
+
+\subsection{Authentification et autorisation}
+\begin{itemize}
+    \item Système de connexion sécurisé pour les médecins
+    \item Gestion des sessions avec timeout
+    \item Contrôle d'accès basé sur les rôles
+    \item Protection des pages administratives
+\end{itemize}
+
+\section{Assurance qualité}
+
+\subsection{Tests}
+\begin{itemize}
+    \item Tests unitaires des fonctionnalités principales
+    \item Tests d'intégration
+    \item Tests de compatibilité navigateur
+    \item Tests de responsive design
+    \item Tests de charge
+\end{itemize}
+
+\subsection{Validation}
+\begin{itemize}
+    \item Validation côté client (JavaScript)
+    \item Validation côté serveur (PHP)
+    \item Vérification de l'intégrité des données
+    \item Gestion d'erreurs robuste
+\end{itemize}
+
+\chapter{Déploiement et Maintenance}
+
+\section{Environnement de déploiement}
+
+\subsection{Configuration serveur}
+\begin{itemize}
+    \item Serveur web Apache ou Nginx
+    \item PHP 7.4+ avec extensions PDO
+    \item MySQL 8.0+ avec support UTF-8
+    \item SSL/TLS pour HTTPS
+    \item Sauvegarde automatique
+\end{itemize}
+
+\subsection{Procédure de déploiement}
+\begin{enumerate}
+    \item Installation des dépendances serveur
+    \item Configuration de la base de données
+    \item Upload des fichiers application
+    \item Configuration des permissions
+    \item Tests de fonctionnement
+    \item Mise en production
+\end{enumerate}
+
+\section{Maintenance}
+
+\subsection{Maintenance préventive}
+\begin{itemize}
+    \item Mises à jour de sécurité régulières
+    \item Sauvegarde quotidienne des données
+    \item Monitoring des performances
+    \item Nettoyage des logs
+\end{itemize}
+
+\subsection{Support utilisateur}
+\begin{itemize}
+    \item Documentation utilisateur
+    \item Formation du personnel médical
+    \item Support technique
+    \item Évolutions fonctionnelles
+\end{itemize}
+
+\chapter{Planning}
+
+\section{Planning de développement}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Phase} & \textbf{Durée} & \textbf{Livrables} \\
+\hline
+Analyse et conception & 2 semaines & Cahier des charges, diagrammes UML \\
+\hline
+Développement frontend & 3 semaines & Interfaces utilisateur \\
+\hline
+Développement backend & 3 semaines & Logique métier, base de données \\
+\hline
+Tests et intégration & 2 semaines & Application fonctionnelle \\
+\hline
+Déploiement & 1 semaine & Application en production \\
+\hline
+Documentation & 1 semaine & Manuel utilisateur \\
+\hline
+\textbf{Total} & \textbf{12 semaines} & \textbf{Application complète} \\
+\hline
+\end{tabular}
+\caption{Planning prévisionnel}
+\end{table}
+
+\chapter{Conclusion}
+
+\section{Bénéfices attendus}
+
+L'implémentation de l'application "Ma Clinique" apportera de nombreux bénéfices :
+
+\subsection{Pour les patients}
+\begin{itemize}
+    \item Gain de temps significatif
+    \item Accès facilité aux soins de santé
+    \item Réduction des déplacements inutiles
+    \item Meilleure visibilité sur les disponibilités
+    \item Interface multilingue inclusive
+\end{itemize}
+
+\subsection{Pour les médecins}
+\begin{itemize}
+    \item Optimisation de la gestion du temps
+    \item Réduction de la charge administrative
+    \item Meilleure organisation du planning
+    \item Statistiques et rapports automatisés
+    \item Communication améliorée avec les patients
+\end{itemize}
+
+\subsection{Pour le système de santé}
+\begin{itemize}
+    \item Utilisation optimale des ressources
+    \item Réduction des coûts administratifs
+    \item Amélioration de la qualité des soins
+    \item Digitalisation du processus
+    \item Données pour l'amélioration continue
+\end{itemize}
+
+\section{Perspectives d'évolution}
+
+\subsection{Évolutions à court terme}
+\begin{itemize}
+    \item Notifications par SMS/email
+    \item Application mobile
+    \item Intégration calendrier
+    \item Paiement en ligne
+\end{itemize}
+
+\subsection{Évolutions à long terme}
+\begin{itemize}
+    \item Intelligence artificielle pour l'optimisation
+    \item Téléconsultation intégrée
+    \item Dossier médical électronique
+    \item Intégration avec d'autres systèmes de santé
+\end{itemize}
+
+\section{Impact social}
+
+Ce projet contribue à la digitalisation du secteur de la santé en Algérie et améliore l'accès aux soins, particulièrement pour les populations rurales. Il s'inscrit dans une démarche de modernisation et d'optimisation du système de santé national.
+
+\appendix
+
+\chapter{Glossaire}
+
+\begin{description}
+    \item[API] Application Programming Interface - Interface de programmation
+    \item[PDO] PHP Data Objects - Interface d'accès aux bases de données
+    \item[CRUD] Create, Read, Update, Delete - Opérations de base sur les données
+    \item[RTL] Right-to-Left - Orientation de droite à gauche pour l'arabe
+    \item[UTF-8] Format d'encodage Unicode
+    \item[Responsive] Design adaptatif aux différentes tailles d'écran
+    \item[UML] Unified Modeling Language - Langage de modélisation unifié
+\end{description}
+
+\chapter{Références}
+
+\begin{itemize}
+    \item Documentation PHP officielle : \url{https://www.php.net/docs.php}
+    \item Documentation MySQL : \url{https://dev.mysql.com/doc/}
+    \item Bootstrap Framework : \url{https://getbootstrap.com/}
+    \item Normes d'accessibilité WCAG : \url{https://www.w3.org/WAI/WCAG21/}
+    \item Bonnes pratiques de sécurité web : \url{https://owasp.org/}
+\end{itemize}
+
+\end{document}
