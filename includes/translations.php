@@ -109,7 +109,7 @@ class Translation {
         'mission_statement' => ['en' => 'Our mission declares our purpose of existence as a healthcare technology solution and our objectives.', 'ar' => 'تعلن مهمتنا عن هدف وجودنا كحل تقني للرعاية الصحية وأهدافنا.'],
         'mission_description' => ['en' => 'To provide every user — whether patient or doctor — much more than expected in terms of usability, accessibility, data security, and personalized service, by understanding local healthcare needs and continuously innovating to ultimately deliver an unmatched experience in medical appointment scheduling through ob-doc-web.', 'ar' => 'تقديم أكثر مما هو متوقع لكل مستخدم - سواء كان مريضاً أو طبيباً - من حيث سهولة الاستخدام وإمكانية الوصول وأمان البيانات والخدمة الشخصية، من خلال فهم احتياجات الرعاية الصحية المحلية والابتكار المستمر لتقديم تجربة لا مثيل لها في جدولة المواعيد الطبية.'],
         'clinic_license' => ['en' => '3 Licence', 'ar' => '3 ليسانس'],
-        'clinic_name' => ['en' => 'Ouarnoughi-Benddine', 'ar' => 'ورنوغي - بن الدين'],
+        'clinic_name' => ['en' => 'Benddine-Ouarnoughi', 'ar' => 'بن الدين - ورنوغي '],
         'medical_center' => ['en' => 'Medical Center', 'ar' => 'مركز طبي'],
         
         // Immediate Section
