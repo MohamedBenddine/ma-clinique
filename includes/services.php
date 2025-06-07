@@ -153,10 +153,10 @@ function getSpecializationData($specialization, $currentLang, $translations) {
                                 <i class="<?php echo $specData['icon']; ?>"></i>
                             </div>
                             <h4>
-                                <a href="specialization.php?id=<?php echo $spec->ID; ?>&name=<?php echo urlencode($spec->Specialization); ?>" 
+                                <strong href="specialization.php?id=<?php echo $spec->ID; ?>&name=<?php echo urlencode($spec->Specialization); ?>" 
                                    class="service-link">
                                     <?php echo $specData['name']; ?>
-                                </a>
+                                </strong>
                             </h4>
                             <p><?php echo $specData['desc']; ?></p>
                         </div>
