@@ -271,3 +271,17 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- Update database charset
+ALTER DATABASE damsmsdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Update tblappointment table
+ALTER TABLE tblappointment CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Update specific columns that store Arabic text
+ALTER TABLE tblappointment 
+MODIFY COLUMN Name VARCHAR(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+MODIFY COLUMN Remark TEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- Update other relevant tables
+ALTER TABLE tbldoctor CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE tblspecialization CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

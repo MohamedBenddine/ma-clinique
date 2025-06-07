@@ -4,6 +4,9 @@ include('doctor/includes/dbconnection.php');
 require_once('includes/translations.php');
 $currentLang = getCurrentLang();
 $isRTL = isRTL();
+
+// Add at the top
+header('Content-Type: text/html; charset=UTF-8');
 ?>
 <!doctype html>
 <html lang="<?php echo $currentLang; ?>" <?php echo $isRTL ? 'dir="rtl"' : 'dir="ltr"'; ?>>
@@ -148,7 +151,7 @@ $isRTL = isRTL();
                                                         <i class="bi bi-person-fill"></i>
                                                         <div>
                                                             <span class="detail-label"><?php echo t('patient_name'); ?></span>
-                                                            <span class="detail-value"><?php echo htmlentities($row->Name); ?></span>
+                                                            <span class="detail-value"><?php echo htmlspecialchars($row->Name, ENT_QUOTES, 'UTF-8'); ?></span>
                                                         </div>
                                                     </div>
                                                     

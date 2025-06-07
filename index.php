@@ -14,6 +14,8 @@ $carouselDirection = $isRTL ? 'rtl' : 'ltr';
 
 <head>
     <title>Ma Clinique|| Home Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             new Splide('.splide', {

@@ -42,6 +42,7 @@ if ($_POST) {
             // Recipients
             $mail->setFrom('myclinique84@gmail.com', 'Ma Clinique Contact Form');
             $mail->addAddress('bkrmld06@gmail.com', 'Clinic Admin');
+            $mail->addAddress('beneddinemohamed11@gmail.com', 'Clinic Owner');
             $mail->addReplyTo($email, $name);
 
             // Content

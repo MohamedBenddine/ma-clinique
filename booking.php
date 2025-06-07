@@ -8,6 +8,11 @@ session_start();
 include('doctor/includes/dbconnection.php');
 require_once('includes/translations.php');
 
+// Add at the top after session_start()
+header('Content-Type: text/html; charset=UTF-8');
+// Remove this line since you're using PDO, not mysqli:
+// mysqli_set_charset($connection, "utf8mb4"); // If using mysqli
+
 $currentLang = getCurrentLang();
 $isRTL = isRTL();
 $error = '';
@@ -18,7 +23,7 @@ unset($_SESSION['appointment_data']);
 
 // Changed condition - check for POST method instead of submit button
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get and sanitize form data
+    // Get and sanitize form data with proper UTF-8 handling
     $name = trim($_POST['name'] ?? '');
     $phone = trim($_POST['phone'] ?? '');
     $email = trim($_POST['email'] ?? '');
@@ -26,6 +31,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $specialization = $_POST['specialization'] ?? '';
     $doctor = $_POST['doctor'] ?? '';
     $user_type = $_POST['user_type'] ?? '';
+    
+    // Ensure proper UTF-8 encoding
+    $name = mb_convert_encoding($name, 'UTF-8', 'auto');
     
     // Validation
     if (empty($name)) {
@@ -97,6 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="<?php echo $currentLang; ?>" <?php echo $isRTL ? 'dir="rtl"' : 'dir="ltr"'; ?>>
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo t('book_appointment_title'); ?></title>
     
@@ -156,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <p><?php echo t('fill_form_carefully'); ?></p>
                             </div>
 
-                            <form method="post" id="bookingForm">
+                            <form method="post" id="bookingForm" accept-charset="UTF-8">
                                 <div class="form-grid">
                                     <!-- User Type -->
                                     <div class="form-group">
@@ -193,7 +202,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </span>
                                             <input type="text" name="name" id="name" class="form-control" 
                                                 placeholder="<?php echo t('full_name_placeholder'); ?>" 
-                                                value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name']) : ''; ?>" required>
+                                                value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : ''; ?>" 
+                                                accept-charset="UTF-8" required>
                                         </div>
                                     </div>
 
@@ -208,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </span>
                                             <input type="tel" name="phone" id="phone" class="form-control" 
                                                 placeholder="<?php echo t('phone_placeholder'); ?>" 
-                                                value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : ''; ?>" required>
+                                                value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : ''; ?>" required>
                                         </div>
                                     </div>
 
@@ -223,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </span>
                                             <input type="email" name="email" id="email" class="form-control" 
                                                 placeholder="<?php echo t('email_placeholder'); ?>" 
-                                                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                                                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : ''; ?>" required>
                                         </div>
                                     </div>
 
@@ -259,7 +269,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                     $stmt = $dbh->query($sql);
                                                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                                         $selected = (isset($_POST['specialization']) && $_POST['specialization'] == $row['ID']) ? 'selected' : '';
-                                                        echo '<option value="' . $row['ID'] . '" ' . $selected . '>' . htmlspecialchars($row['Specialization']) . '</option>';
+                                                        echo '<option value="' . $row['ID'] . '" ' . $selected . '>' . htmlspecialchars($row['Specialization'], ENT_QUOTES, 'UTF-8') . '</option>';
                                                     }
                                                 } catch (Exception $e) {
                                                     echo '<option value="">Error loading specializations</option>';
@@ -288,7 +298,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                         $stmt->execute([$_POST['specialization']]);
                                                         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                                                             $selected = (isset($_POST['doctor']) && $_POST['doctor'] == $row['ID']) ? 'selected' : '';
-                                                            echo '<option value="' . $row['ID'] . '" ' . $selected . '>' . htmlspecialchars($row['FullName']) . '</option>';
+                                                            echo '<option value="' . $row['ID'] . '" ' . $selected . '>' . htmlspecialchars($row['FullName'], ENT_QUOTES, 'UTF-8') . '</option>';
                                                         }
                                                     } catch (Exception $e) {
                                                         echo '<option value="">Error loading doctors</option>';
@@ -344,7 +354,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             fetch('get_doctors.php', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                 },
                 body: 'sp_id=' + encodeURIComponent(specializationId)
             })

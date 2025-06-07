@@ -2,24 +2,30 @@
 session_start();
 error_reporting(0);
 include('includes/dbconnection.php');
+header('Content-Type: text/html; charset=UTF-8');
 if (strlen($_SESSION['damsid']==0)) {
   header('location:logout.php');
   } else{
 
  if(isset($_POST['submit']))
   { 
-    $eid=$_GET['editid'];
-    $aptid=$_GET['aptid'];
-    $status=$_POST['status'];
-   $remark=$_POST['remark'];
-      $sql= "update tblappointment set Status=:status,Remark=:remark where ID=:eid";
-    $query=$dbh->prepare($sql);
-$query->bindParam(':status',$status,PDO::PARAM_STR);
-$query->bindParam(':remark',$remark,PDO::PARAM_STR);
-$query->bindParam(':eid',$eid,PDO::PARAM_STR);
- $query->execute();
- echo '<script>alert("Remark and status has been updated")</script>';
- echo "<script>window.location.href ='all-appointment.php'</script>";
+    $eid = $_GET['editid'];
+    $aptid = $_GET['aptid'];
+    $status = $_POST['status'];
+    $remark = $_POST['remark'];
+    
+    // Ensure proper UTF-8 encoding for remark
+    $remark = mb_convert_encoding($remark, 'UTF-8', 'auto');
+    
+    $sql = "UPDATE tblappointment SET Status=:status, Remark=:remark WHERE ID=:eid";
+    $query = $dbh->prepare($sql);
+    $query->bindParam(':status', $status, PDO::PARAM_STR);
+    $query->bindParam(':remark', $remark, PDO::PARAM_STR);
+    $query->bindParam(':eid', $eid, PDO::PARAM_STR);
+    $query->execute();
+    
+    echo '<script>alert("Remark and status has been updated")</script>';
+    echo "<script>window.location.href ='all-appointment.php'</script>";
 }
   ?>
 <!DOCTYPE html>
@@ -177,7 +183,14 @@ if ($status=="" ){
      <tr>
     <th>Remark :</th>
     <td>
-    <textarea name="remark" placeholder="Remark" rows="12" cols="14" class="form-control wd-450" required="true"></textarea></td>
+    <textarea name="remark" 
+          placeholder="Remark" 
+          rows="12" 
+          cols="14" 
+          class="form-control wd-450" 
+          required="true"
+          style="font-family: 'Cairo', 'Tajawal', Arial, sans-serif;"
+          accept-charset="UTF-8"></textarea></td>
   </tr> 
      
   <tr>
