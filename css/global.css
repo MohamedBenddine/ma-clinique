@@ -110,6 +110,24 @@
   color: white;
   text-decoration: none;
 }
+.primary-button3 {
+  background-color: #0099ff;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  border: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.primary-button3:hover {
+  background-color: white;
+  color: #0099ff;
+  text-decoration: none;
+}
 
 .section-padding {
   padding: 2rem 1rem;

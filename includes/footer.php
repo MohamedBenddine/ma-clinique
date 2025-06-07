@@ -111,7 +111,7 @@ $isRTL = isRTL();
                             <a href="#" class="social-icon twitter" aria-label="Twitter">
                                 <i class="bi bi-twitter"></i>
                             </a>
-                            <a href="#" class="social-icon instagram" aria-label="Instagram">
+                            <a href="https://www.instagram.com/l.mouh0/" class="social-icon instagram" aria-label="Instagram">
                                 <i class="bi bi-instagram"></i>
                             </a>
                             <a href="#" class="social-icon youtube" aria-label="YouTube">

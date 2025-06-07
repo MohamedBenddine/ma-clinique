@@ -58,6 +58,7 @@ $isRTL = isRTL();
         $param1 = 'white'; // White background for standalone about page
         include_once('includes/about.php');
         ?>
+    <img src="images/assets/wave-haikei.svg" alt="mamchatch">
     </main>
 
     <?php include_once('includes/footer.php'); ?>
