@@ -7,7 +7,9 @@ class Translation {
         'appointment' => ['en' => 'Appointment', 'ar' => 'حجز موعد'],
         'contact' => ['en' => 'Contact', 'ar' => 'اتصل بنا'],
         'doctor_login' => ['en' => 'Doctor Portal', 'ar' => 'بوابة الطبيب'],
-        
+        'ma_clinique' => ['en' => 'Ma Clinique', 'ar' => 'Ma Clinique'],
+        'healthcare_excellence' => ['en' => 'Healthcare Excellence', 'ar' => 'Healthcare Excellence'],
+
         // Check Appointment Page
         'check_appointment_title' => ['en' => 'Check Appointment Status - Medical Care', 'ar' => 'فحص حالة الموعد - الرعاية الطبية'],
         'check_your_appointment' => ['en' => 'Check Your Appointment', 'ar' => 'تحقق من موعدك'],
