@@ -192,105 +192,280 @@ body {
 
 /* Print Styles */
 @media print {
-  body {
-    background-color: #fff;
-    font-size: 12pt; /* Adjust base font size for print */
+  /* Reset all margins and padding for print */
+  * {
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
   }
 
-  header,
-  footer,
-  .ticket-footer .btn,
+  body {
+    font-family: "Cairo", "Tajawal", Arial, sans-serif !important;
+    direction: inherit !important;
+    text-align: inherit !important;
+    background: white !important;
+    color: black !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Hide elements that shouldn't be printed */
   .navbar,
-  .site-footer {
-    /* Hide header, footer, buttons for print */
+  .header,
+  .footer,
+  .print-button,
+  .back-home-button,
+  .btn,
+  nav,
+  header,
+  footer {
     display: none !important;
   }
 
-  main {
+  /* Main ticket container for print */
+  .ticket-section {
     padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    background: white !important;
+  }
+
+  .container {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 10px !important;
     margin: 0 !important;
   }
 
-  .ticket-section {
-    padding: 0;
-  }
-
   .ticket-card {
-    box-shadow: none;
-    border: 1px solid #ccc; /* Optional: add a border for printed ticket */
-    margin: 0;
-    max-width: 100%;
-    border-radius: 0;
+    border: 2px solid #333 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: white !important;
+    padding: 20px !important;
+    margin: 0 !important;
+    width: 100% !important;
+    page-break-inside: avoid !important;
   }
 
+  /* RTL specific print styles */
+  [dir="rtl"] .ticket-card {
+    direction: rtl !important;
+    text-align: right !important;
+  }
+
+  [dir="rtl"] .ticket-header,
+  [dir="rtl"] .ticket-body,
+  [dir="rtl"] .appointment-number-section {
+    text-align: center !important;
+  }
+
+  [dir="rtl"] .ticket-details-grid {
+    direction: rtl !important;
+  }
+
+  [dir="rtl"] .detail-row {
+    direction: rtl !important;
+    text-align: right !important;
+    justify-content: flex-start !important;
+  }
+
+  [dir="rtl"] .detail-row strong {
+    margin-left: 10px !important;
+    margin-right: 0 !important;
+  }
+
+  /* Header styles for print */
   .ticket-header {
-    background: #eee !important; /* Simpler background for print */
-    color: #000 !important;
-    padding: 1.5rem;
-    border-bottom: 1px solid #ccc;
+    text-align: center !important;
+    margin-bottom: 20px !important;
+    border-bottom: 1px solid #333 !important;
+    padding-bottom: 15px !important;
   }
-  .ticket-header .ticket-success-icon {
-    font-size: 2rem;
-    color: #333 !important;
+
+  .ticket-success-icon {
+    font-size: 2rem !important;
+    color: #28a745 !important;
+    margin-bottom: 10px !important;
   }
+
   .ticket-header h1 {
-    font-size: 1.5rem;
-    color: #000 !important;
+    font-size: 1.5rem !important;
+    font-weight: bold !important;
+    margin-bottom: 5px !important;
+    color: #333 !important;
   }
+
   .ticket-header p {
-    font-size: 1rem;
-    color: #333 !important;
+    font-size: 1rem !important;
+    color: #666 !important;
   }
 
-  .ticket-body {
-    padding: 1.5rem;
-  }
-
+  /* Appointment number for print */
   .appointment-number-section {
-    background-color: #f9f9f9 !important;
-    border: 1px solid #ddd !important;
-    padding: 1rem;
+    text-align: center !important;
+    margin: 20px 0 !important;
+    padding: 15px !important;
+    border: 2px dashed #333 !important;
+    background: #f8f9fa !important;
   }
+
   .appointment-number-section h2 {
-    font-size: 1rem;
+    font-size: 1.1rem !important;
+    margin-bottom: 10px !important;
     color: #333 !important;
   }
+
   .appointment-number {
-    font-size: 1.8rem;
-    color: #000 !important;
+    font-size: 2rem !important;
+    font-weight: bold !important;
+    color: #0099ff !important;
+    letter-spacing: 2px !important;
   }
 
+  /* Details grid for print */
   .ticket-details-grid {
-    grid-template-columns: 1fr; /* Stack details on print if needed */
-    gap: 1rem;
+    display: block !important;
+    margin: 20px 0 !important;
   }
+
+  .ticket-detail-item {
+    margin-bottom: 20px !important;
+    padding: 15px !important;
+    border: 1px solid #ddd !important;
+    background: #fafafa !important;
+    page-break-inside: avoid !important;
+  }
+
   .ticket-detail-item h4 {
-    font-size: 1.1rem;
-    border-bottom: 1px solid #999;
-  }
-  .ticket-detail-item p {
-    font-size: 0.95rem;
-  }
-
-  .clinic-location-section .clinic-address-web {
-    display: none; /* Hide the web version of address (with link) */
-  }
-  .clinic-location-section .clinic-address-print {
-    display: block !important; /* Show plain text address */
-    color: #000 !important;
-  }
-  .clinic-location-section small {
-    display: none; /* Hide hint for print */
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+    color: #333 !important;
+    border-bottom: 1px solid #ddd !important;
+    padding-bottom: 5px !important;
   }
 
-  a {
-    /* Remove link styling for print */
-    text-decoration: none !important;
-    color: inherit !important;
+  .detail-row {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    margin-bottom: 8px !important;
+    padding: 5px 0 !important;
   }
-  a[href]:after {
-    /* Optionally show full URL for links if needed, but usually not for tickets */
-    /* content: " (" attr(href) ")"; */
-    display: none;
+
+  .detail-row strong {
+    font-weight: bold !important;
+    color: #333 !important;
+    margin-right: 10px !important;
+    min-width: 30% !important;
   }
+
+  .detail-row span {
+    color: #555 !important;
+    flex: 1 !important;
+    text-align: left !important;
+  }
+
+  [dir="rtl"] .detail-row span {
+    text-align: right !important;
+  }
+
+  /* Clinic location for print */
+  .clinic-location-section {
+    margin-top: 20px !important;
+    padding: 15px !important;
+    border: 1px solid #ddd !important;
+    background: #f0f8ff !important;
+  }
+
+  .clinic-location-section h4 {
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+    margin-bottom: 10px !important;
+    color: #333 !important;
+  }
+
+  .clinic-address-web {
+    display: none !important;
+  }
+
+  .clinic-address-print {
+    display: block !important;
+    font-size: 1rem !important;
+    color: #555 !important;
+  }
+
+  .clinic-address-print i {
+    margin-right: 5px !important;
+    color: #0099ff !important;
+  }
+
+  [dir="rtl"] .clinic-address-print i {
+    margin-right: 0 !important;
+    margin-left: 5px !important;
+  }
+
+  /* Force black text for all content */
+  .ticket-card * {
+    color: black !important;
+    background: transparent !important;
+  }
+
+  /* Exception for colored elements */
+  .ticket-success-icon,
+  .appointment-number,
+  .clinic-address-print i {
+    color: #0099ff !important;
+  }
+
+  /* Ensure proper page breaks */
+  .ticket-card {
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Hide wave images and decorative elements */
+  img[src*="wave"],
+  img[alt*="wave"],
+  img[src*="haikei"],
+  img[alt*="mamchatch"],
+  .wave,
+  .waves,
+  .wave-bottom,
+  .wave-top,
+  section img,
+  main img {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  /* Hide any background images */
+  * {
+    background-image: none !important;
+  }
+
+  /* Specifically target the wave image at the bottom of pages */
+  img[src="images/assets/wave-haikei.svg"],
+  img[alt="mamchatch"] {
+    display: none !important;
+  }
+
+  /* Hide any decorative images in sections */
+  section > img,
+  main > img,
+  .container > img,
+  .row > img {
+    display: none !important;
+  }
+}
+
+/* Additional RTL support for screen view */
+[dir="rtl"] .detail-row {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .detail-row strong {
+  margin-right: 0;
+  margin-left: 10px;
 }
