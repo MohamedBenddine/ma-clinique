@@ -10,8 +10,13 @@ class Translation {
         'ma_clinique' => ['en' => 'Ma Clinique', 'ar' => 'Ma Clinique'],
         'healthcare_excellence' => ['en' => 'Healthcare Excellence', 'ar' => 'Healthcare Excellence'],
         'phone_invalid' => ['en' => 'Invalid phone number format', 'ar' => 'تنسيق رقم الهاتف غير صالح'],
-
-        // Check Appointment Page
+        'view_on_map' => ['en' => 'View on Map', 'ar' => 'عرض على الخريطة'],
+        'call_clinic' => ['en' => 'Call Clinic', 'ar' => 'اتصل بالعيادة'],
+        'patient_information' => ['en' => 'Patient Information', 'ar' => 'معلومات المريض'],
+        'doctor_information' => ['en' => 'Doctor Information', 'ar' => 'معلومات الطبيب'],
+        'doctor_phone' => ['en' => 'Doctor Phone', 'ar' => 'هاتف الطبيب'],
+        'doctor_email' => ['en' => 'Doctor Email', 'ar' => 'بريد الطبيب الإلكتروني'],
+        
         'check_appointment_title' => ['en' => 'Check Appointment Status - Medical Care', 'ar' => 'فحص حالة الموعد - الرعاية الطبية'],
         'check_your_appointment' => ['en' => 'Check Your Appointment', 'ar' => 'تحقق من موعدك'],
         'track_appointment_status' => ['en' => 'Track your appointment status quickly and easily', 'ar' => 'تتبع حالة موعدك بسرعة وسهولة'],

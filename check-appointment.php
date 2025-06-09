@@ -99,132 +99,242 @@ header('Content-Type: text/html; charset=UTF-8');
 
                             <div class="results-card">
                                 <?php
-                                $sql = "SELECT * from tblappointment where AppointmentNumber like '%$sdata%' || Name like '%$sdata%' || MobileNumber like '%$sdata%'";
-                                $query = $dbh->prepare($sql);
-                                $query->execute();
-                                $results = $query->fetchAll(PDO::FETCH_OBJ);
+                                try {
+                                    // Fixed SQL query with unique parameter names
+                                    $sql = "SELECT 
+                                        ta.*,
+                                        td.FullName as DoctorName,
+                                        td.MobileNumber as DoctorPhone,
+                                        td.Email as DoctorEmail,
+                                        ts.Specialization as SpecializationName
+                                    FROM tblappointment ta
+                                    LEFT JOIN tbldoctor td ON ta.Doctor = td.ID
+                                    LEFT JOIN tblspecialization ts ON ta.Specialization = ts.ID
+                                    WHERE ta.AppointmentNumber LIKE :search1
+                                       OR ta.Name LIKE :search2
+                                       OR ta.MobileNumber LIKE :search3
+                                       OR td.FullName LIKE :search4
+                                       OR ts.Specialization LIKE :search5";
+                                    
+                                    $query = $dbh->prepare($sql);
+                                    $searchParam = '%' . $sdata . '%';
+                                    
+                                    // Bind each parameter with unique names
+                                    $query->bindParam(':search1', $searchParam, PDO::PARAM_STR);
+                                    $query->bindParam(':search2', $searchParam, PDO::PARAM_STR);
+                                    $query->bindParam(':search3', $searchParam, PDO::PARAM_STR);
+                                    $query->bindParam(':search4', $searchParam, PDO::PARAM_STR);
+                                    $query->bindParam(':search5', $searchParam, PDO::PARAM_STR);
+                                    
+                                    $query->execute();
+                                    $results = $query->fetchAll(PDO::FETCH_OBJ);
 
-                                if ($query->rowCount() > 0):
-                                    $cnt = 1;
-                                    foreach ($results as $row): ?>
-                                        <div class="appointment-item">
-                                            <div class="appointment-header">
-                                                <div class="appointment-number">
-                                                    <i class="bi bi-hash"></i>
-                                                    <span><?php echo htmlentities($row->AppointmentNumber); ?></span>
-                                                </div>
-                                                <div class="appointment-status">
-                                                    <?php 
-                                                    $status = ($row->Status !== null) ? $row->Status : "Pending";
-                                                    $statusClass = '';
-                                                    $statusIcon = '';
-                                                    $statusText = '';
-                                                    
-                                                    switch(strtolower($status)) {
-                                                        case 'approved':
-                                                            $statusClass = 'status-approved';
-                                                            $statusIcon = 'bi-check-circle-fill';
-                                                            $statusText = t('status_approved');
-                                                            break;
-                                                        case 'cancelled':
-                                                        case 'rejected':
-                                                            $statusClass = 'status-cancelled';
-                                                            $statusIcon = 'bi-x-circle-fill';
-                                                            $statusText = strtolower($status) === 'cancelled' ? t('status_cancelled') : t('status_rejected');
-                                                            break;
-                                                        case 'completed':
-                                                            $statusClass = 'status-approved';
-                                                            $statusIcon = 'bi-check-circle-fill';
-                                                            $statusText = t('status_completed');
-                                                            break;
-                                                        default:
-                                                            $statusClass = 'status-pending';
-                                                            $statusIcon = 'bi-clock-fill';
-                                                            $statusText = t('status_pending');
-                                                    }
-                                                    ?>
-                                                    <span class="status-badge <?php echo $statusClass; ?>">
-                                                        <i class="bi <?php echo $statusIcon; ?>"></i>
-                                                        <?php echo $statusText; ?>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                            
-                                            <div class="appointment-details">
-                                                <div class="detail-grid">
-                                                    <div class="detail-item">
-                                                        <i class="bi bi-person-fill"></i>
-                                                        <div>
-                                                            <span class="detail-label"><?php echo t('patient_name'); ?></span>
-                                                            <span class="detail-value"><?php echo htmlspecialchars($row->Name, ENT_QUOTES, 'UTF-8'); ?></span>
-                                                        </div>
+                                    if ($query->rowCount() > 0):
+                                        $cnt = 1;
+                                        foreach ($results as $row): ?>
+                                            <div class="appointment-item">
+                                                <div class="appointment-header">
+                                                    <div class="appointment-number">
+                                                        <i class="bi bi-hash"></i>
+                                                        <span><?php echo htmlentities($row->AppointmentNumber); ?></span>
                                                     </div>
-                                                    
-                                                    <div class="detail-item">
-                                                        <i class="bi bi-telephone-fill"></i>
-                                                        <div>
-                                                            <span class="detail-label"><?php echo t('mobile_number'); ?></span>
-                                                            <span class="detail-value"><?php echo htmlentities($row->MobileNumber); ?></span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="detail-item">
-                                                        <i class="bi bi-envelope-fill"></i>
-                                                        <div>
-                                                            <span class="detail-label"><?php echo t('email_address'); ?></span>
-                                                            <span class="detail-value"><?php echo htmlentities($row->Email); ?></span>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="detail-item">
-                                                        <i class="bi bi-calendar-fill"></i>
-                                                        <div>
-                                                            <span class="detail-label"><?php echo t('appointment_date'); ?></span>
-                                                            <span class="detail-value"><?php echo date('F j, Y', strtotime($row->AppointmentDate)); ?></span>
-                                                        </div>
+                                                    <div class="appointment-status">
+                                                        <?php 
+                                                        $status = ($row->Status !== null) ? $row->Status : "Pending";
+                                                        $statusClass = '';
+                                                        $statusIcon = '';
+                                                        $statusText = '';
+                                                        
+                                                        switch(strtolower($status)) {
+                                                            case 'approved':
+                                                                $statusClass = 'status-approved';
+                                                                $statusIcon = 'bi-check-circle-fill';
+                                                                $statusText = t('status_approved');
+                                                                break;
+                                                            case 'cancelled':
+                                                            case 'rejected':
+                                                                $statusClass = 'status-cancelled';
+                                                                $statusIcon = 'bi-x-circle-fill';
+                                                                $statusText = strtolower($status) === 'cancelled' ? t('status_cancelled') : t('status_rejected');
+                                                                break;
+                                                            case 'completed':
+                                                                $statusClass = 'status-approved';
+                                                                $statusIcon = 'bi-check-circle-fill';
+                                                                $statusText = t('status_completed');
+                                                                break;
+                                                            default:
+                                                                $statusClass = 'status-pending';
+                                                                $statusIcon = 'bi-clock-fill';
+                                                                $statusText = t('status_pending');
+                                                        }
+                                                        ?>
+                                                        <span class="status-badge <?php echo $statusClass; ?>">
+                                                            <i class="bi <?php echo $statusIcon; ?>"></i>
+                                                            <?php echo $statusText; ?>
+                                                        </span>
                                                     </div>
                                                 </div>
                                                 
-                                                <?php if($row->Remark !== null && trim($row->Remark) !== ''): ?>
-                                                    <div class="appointment-remark">
-                                                        <i class="bi bi-chat-square-text-fill"></i>
-                                                        <div>
-                                                            <span class="detail-label"><?php echo t('doctors_remark'); ?></span>
-                                                            <span class="detail-value">
-                                                                <?php 
-                                                                $originalRemark = htmlentities($row->Remark);
-                                                                $translatedRemark = translateRemark($row->Remark, $currentLang);
-                                                                
-                                                                // If the translated remark is different from original, show both
-                                                                if ($originalRemark !== $translatedRemark && $translatedRemark !== $row->Remark) {
-                                                                    echo htmlentities($translatedRemark);
-                                                                    // Show original in small text if it was translated
-                                                                    if ($currentLang === 'ar' && !Translation::isArabicText($row->Remark)) {
-                                                                        echo '<br><small class="text-muted original-remark">(' . $originalRemark . ')</small>';
-                                                                    } elseif ($currentLang === 'en' && Translation::isArabicText($row->Remark)) {
-                                                                        echo '<br><small class="text-muted original-remark">(' . $originalRemark . ')</small>';
-                                                                    }
-                                                                } else {
-                                                                    echo $originalRemark;
-                                                                }
-                                                                ?>
-                                                            </span>
+                                                <div class="appointment-details">
+                                                    <!-- Patient Information -->
+                                                    <div class="detail-section">
+                                                        <h5 class="section-title">
+                                                            <i class="bi bi-person-circle"></i>
+                                                            <?php echo t('patient_information'); ?>
+                                                        </h5>
+                                                        <div class="detail-grid">
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-person-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('patient_name'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlspecialchars($row->Name, ENT_QUOTES, 'UTF-8'); ?></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-telephone-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('mobile_number'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlentities($row->MobileNumber); ?></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-envelope-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('email_address'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlentities($row->Email); ?></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-calendar-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('appointment_date'); ?></span>
+                                                                    <span class="detail-value"><?php echo date('F j, Y', strtotime($row->AppointmentDate)); ?></span>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                <?php endif; ?>
+
+                                                    <!-- Doctor Information -->
+                                                    <div class="detail-section">
+                                                        <h5 class="section-title">
+                                                            <i class="bi bi-person-badge"></i>
+                                                            <?php echo t('doctor_information'); ?>
+                                                        </h5>
+                                                        <div class="detail-grid">
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-person-badge-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('doctor_name'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlspecialchars($row->DoctorName ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-heart-pulse-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('specialization'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlspecialchars($row->SpecializationName ?? 'N/A', ENT_QUOTES, 'UTF-8'); ?></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-telephone-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('doctor_phone'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlentities($row->DoctorPhone ?? 'N/A'); ?></span>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="detail-item">
+                                                                <i class="bi bi-envelope-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('doctor_email'); ?></span>
+                                                                    <span class="detail-value"><?php echo htmlentities($row->DoctorEmail ?? 'N/A'); ?></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Clinic Location -->
+                                                    <div class="detail-section">
+                                                        <h5 class="section-title">
+                                                            <i class="bi bi-geo-alt"></i>
+                                                            <?php echo t('clinic_location'); ?>
+                                                        </h5>
+                                                        <div class="clinic-location-card">
+                                                            <div class="location-info">
+                                                                <i class="bi bi-building-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('clinic_name'); ?></span>
+                                                                    <span class="detail-value">Ma Clinique</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location-info">
+                                                                <i class="bi bi-geo-alt-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('address'); ?></span>
+                                                                    <span class="detail-value">Aflou, Laghouat, Algeria</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location-info">
+                                                                <i class="bi bi-telephone-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-label"><?php echo t('clinic_phone'); ?></span>
+                                                                    <span class="detail-value">05 62 54 28 39</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="location-actions">
+                                                                <a href="https://www.google.com/maps/search/Aflou,+Laghouat,+Algeria" target="_blank" class="location-btn">
+                                                                    <i class="bi bi-map"></i>
+                                                                    <?php echo t('view_on_map'); ?>
+                                                                </a>
+                                                                <a href="tel:0562542839" class="location-btn">
+                                                                    <i class="bi bi-telephone"></i>
+                                                                    <?php echo t('call_clinic'); ?>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <?php if($row->Remark !== null && trim($row->Remark) !== ''): ?>
+                                                        <div class="detail-section">
+                                                            <h5 class="section-title">
+                                                                <i class="bi bi-chat-square-text"></i>
+                                                                <?php echo t('doctors_remark'); ?>
+                                                            </h5>
+                                                            <div class="appointment-remark">
+                                                                <i class="bi bi-chat-square-text-fill"></i>
+                                                                <div>
+                                                                    <span class="detail-value">
+                                                                        <?php echo htmlentities($row->Remark); ?>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
+                                        <?php 
+                                        $cnt++;
+                                        endforeach;
+                                    else: ?>
+                                        <div class="no-results">
+                                            <i class="bi bi-search-no-results"></i>
+                                            <h5><?php echo t('no_appointments_found'); ?></h5>
+                                            <p><?php echo t('no_records_found'); ?> "<strong><?php echo htmlspecialchars($sdata); ?></strong>"</p>
+                                            <p class="text-muted"><?php echo t('check_search_term'); ?></p>
                                         </div>
-                                    <?php 
-                                    $cnt++;
-                                    endforeach;
-                                else: ?>
-                                    <div class="no-results">
-                                        <i class="bi bi-search-no-results"></i>
-                                        <h5><?php echo t('no_appointments_found'); ?></h5>
-                                        <p><?php echo t('no_records_found'); ?> "<strong><?php echo htmlspecialchars($sdata); ?></strong>"</p>
-                                        <p class="text-muted"><?php echo t('check_search_term'); ?></p>
-                                    </div>
-                                <?php endif; ?>
+                                    <?php endif;
+                                    
+                                } catch (PDOException $e) {
+                                    echo '<div class="alert alert-danger">Database error: ' . htmlentities($e->getMessage()) . '</div>';
+                                } catch (Exception $e) {
+                                    echo '<div class="alert alert-danger">Error: ' . htmlentities($e->getMessage()) . '</div>';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
