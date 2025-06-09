@@ -9,6 +9,7 @@ class Translation {
         'doctor_login' => ['en' => 'Doctor Portal', 'ar' => 'بوابة الطبيب'],
         'ma_clinique' => ['en' => 'Ma Clinique', 'ar' => 'Ma Clinique'],
         'healthcare_excellence' => ['en' => 'Healthcare Excellence', 'ar' => 'Healthcare Excellence'],
+        'phone_invalid' => ['en' => 'Invalid phone number format', 'ar' => 'تنسيق رقم الهاتف غير صالح'],
 
         // Check Appointment Page
         'check_appointment_title' => ['en' => 'Check Appointment Status - Medical Care', 'ar' => 'فحص حالة الموعد - الرعاية الطبية'],

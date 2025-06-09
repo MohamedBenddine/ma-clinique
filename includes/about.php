@@ -48,7 +48,7 @@ $isRTL = isRTL();
                     </div>
                     
                     <div class="about-cta mt-4">
-                        <a href="#contact-us" class="btn btn-cta <?php echo $isRTL ? 'ms-3' : 'me-3'; ?>" style="<?php echo $backgroundColor == '#0099ff' ? 'background: white; color: #0099ff; border: 2px solid white;' : 'background: #0099ff; color: white; border: 2px solid #0099ff;'; ?>">
+                        <a href="booking.php" class="btn btn-cta <?php echo $isRTL ? 'ms-3' : 'me-3'; ?>" style="<?php echo $backgroundColor == '#0099ff' ? 'background: white; color: #0099ff; border: 2px solid white;' : 'background: #0099ff; color: white; border: 2px solid #0099ff;'; ?>">
                             <i class="bi bi-calendar-check"></i> <?php echo t('book_appointment'); ?>
                         </a>
                       

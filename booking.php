@@ -18,6 +18,15 @@ $isRTL = isRTL();
 $error = '';
 $success = '';
 
+// Initialize validation flags
+$invalid_name = false;
+$invalid_phone = false;
+$invalid_email = false;
+$invalid_date = false;
+$invalid_specialization = false;
+$invalid_doctor = false;
+$invalid_user_type = false;
+
 // Clear any previous ticket info from session
 unset($_SESSION['appointment_data']);
 
@@ -35,25 +44,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ensure proper UTF-8 encoding
     $name = mb_convert_encoding($name, 'UTF-8', 'auto');
     
-    // Validation
+    // Validation with individual field flags
     if (empty($name)) {
+        $invalid_name = true;
         $error = t('name_required');
     } elseif (empty($phone)) {
+        $invalid_phone = true;
         $error = t('phone_required');
+    } elseif (!preg_match('/^(06|05|07)[0-9]{8}$/', $phone)) {
+        $invalid_phone = true;
+        $error = t('phone_invalid');
     } elseif (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $invalid_email = true;
         $error = t('email_required');
     } elseif (empty($date)) {
+        $invalid_date = true;
         $error = t('date_required');
     } elseif (empty($specialization)) {
+        $invalid_specialization = true;
         $error = t('specialization_required');
     } elseif (empty($doctor)) {
+        $invalid_doctor = true;
         $error = t('doctor_required');
     } elseif (empty($user_type)) {
+        $invalid_user_type = true;
         $error = t('user_type_required');
     } else {
         // Date validation
         $today = date('Y-m-d');
         if ($date <= $today) {
+            $invalid_date = true;
             $error = t('date_error');
         } else {
             try {
@@ -176,7 +196,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-person-circle"></i>
                                             </span>
-                                            <select name="user_type" id="user_type" class="form-control" required>
+                                            <select name="user_type" id="user_type" class="form-control <?php echo $invalid_user_type ? 'is-invalid' : ''; ?>" >
                                                 <option value=""><?php echo t('select_user_type'); ?></option>
                                                 <option value="new" <?php echo (isset($_POST['user_type']) && $_POST['user_type'] == 'new') ? 'selected' : ''; ?>>
                                                     <?php echo t('new_appointment'); ?>
@@ -200,10 +220,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-person-fill"></i>
                                             </span>
-                                            <input type="text" name="name" id="name" class="form-control" 
+                                            <input type="text" name="name" id="name" class="form-control <?php echo $invalid_name ? 'is-invalid' : ''; ?>" 
                                                 placeholder="<?php echo t('full_name_placeholder'); ?>" 
                                                 value="<?php echo isset($_POST['name']) ? htmlspecialchars($_POST['name'], ENT_QUOTES, 'UTF-8') : ''; ?>" 
-                                                accept-charset="UTF-8" required>
+                                                accept-charset="UTF-8" >
                                         </div>
                                     </div>
 
@@ -216,9 +236,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </span>
-                                            <input type="tel" name="phone" id="phone" class="form-control" 
+                                            <input type="tel" name="phone" id="phone" 
+                                                class="form-control <?php echo $invalid_phone ? 'is-invalid' : ''; ?>"
                                                 placeholder="<?php echo t('phone_placeholder'); ?>" 
-                                                value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : ''; ?>" required>
+                                                value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : ''; ?>" >
                                         </div>
                                     </div>
 
@@ -231,9 +252,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-envelope-fill"></i>
                                             </span>
-                                            <input type="email" name="email" id="email" class="form-control" 
+                                            <input type="email" name="email" id="email" class="form-control <?php echo $invalid_email ? 'is-invalid' : ''; ?>" 
                                                 placeholder="<?php echo t('email_placeholder'); ?>" 
-                                                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : ''; ?>" required>
+                                                value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email'], ENT_QUOTES, 'UTF-8') : ''; ?>" >
                                         </div>
                                     </div>
 
@@ -246,9 +267,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-calendar-fill"></i>
                                             </span>
-                                            <input type="date" name="date" id="date" class="form-control" 
+                                            <input type="date" name="date" id="date" class="form-control <?php echo $invalid_date ? 'is-invalid' : ''; ?>" 
                                                 value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" 
-                                                min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" required>
+                                                min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" >
                                         </div>
                                     </div>
 
@@ -261,7 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-heart-pulse-fill"></i>
                                             </span>
-                                            <select name="specialization" id="specialization" class="form-control" required onchange="loadDoctors(this.value)">
+                                            <select name="specialization" id="specialization" class="form-control <?php echo $invalid_specialization ? 'is-invalid' : ''; ?>"  onchange="loadDoctors(this.value)">
                                                 <option value=""><?php echo t('select_specialization'); ?></option>
                                                 <?php
                                                 try {
@@ -288,7 +309,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-person-badge-fill"></i>
                                             </span>
-                                            <select name="doctor" id="doctor" class="form-control" required>
+                                            <select name="doctor" id="doctor" class="form-control <?php echo $invalid_doctor ? 'is-invalid' : ''; ?>" >
                                                 <option value=""><?php echo t('select_doctor'); ?></option>
                                                 <?php if (isset($_POST['specialization']) && !empty($_POST['specialization'])): ?>
                                                     <?php

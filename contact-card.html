@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Clinique - Contact</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0099ff 0%, #007acc 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            color: #0099ff;
+            margin-bottom: 10px;
+        }
+        
+        .clinic-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .tagline {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+        
+        .contact-info {
+            margin: 30px 0;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .contact-item i {
+            font-size: 1.2rem;
+            color: #0099ff;
+            margin-right: 15px;
+            width: 20px;
+        }
+        
+        .contact-item a {
+            color: #2c3e50;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .contact-item a:hover {
+            color: #0099ff;
+        }
+        
+        .contact-item span {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+        
+        .cta-buttons {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            margin: 8px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #0099ff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #007acc;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,153,255,0.3);
+        }
+        
+        .btn-outline {
+            border: 2px solid #0099ff;
+            color: #0099ff;
+        }
+        
+        .btn-outline:hover {
+            background: #0099ff;
+            color: white;
+        }
+        
+        .hours {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f1f3f4;
+            border-radius: 10px;
+        }
+        
+        .hours h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        /* Status Styles */
+        .status-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .status-open {
+            background: #00c851;
+            animation: pulse 2s infinite;
+        }
+        
+        .status-closed {
+            background: #ff4444;
+        }
+        
+        .status-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        
+        .status-text.open {
+            color: #27ae60;
+        }
+        
+        .status-text.closed {
+            color: #e74c3c;
+        }
+        
+        .hours-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+        
+        /* Pulsing animation for open status */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 200, 81, 0.7);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 0 6px rgba(0, 200, 81, 0.3);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 200, 81, 0);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .contact-card {
+                padding: 30px 20px;
+            }
+            
+            .clinic-name {
+                font-size: 1.7rem;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="contact-card">
+        <div class="logo">
+            <i class="fas fa-clinic-medical"></i>
+        </div>
+        <h1 class="clinic-name">Ma Clinique</h1>
+        <p class="tagline">Your Health, Our Priority</p>
+        
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+213562542839">05 62 54 28 39</a>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/213562542839?text=Hello, I'd like to book an appointment">WhatsApp Us</a>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <a href="mailto:myclinique84@gmail.com">myclinique84@gmail.com</a>
+            </div>
+            
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <a href="https://www.google.com/maps/search/Aflou,+Laghouat,+Algeria" target="_blank">Aflou, Laghouat, Algeria</a>
+            </div>
+        </div>
+        
+        <div class="hours">
+            <h3><i class="fas fa-clock"></i> Availability</h3>
+            <div class="status-container">
+                <div id="statusDot" class="status-dot"></div>
+                <div id="statusText" class="status-text"></div>
+            </div>
+            <div id="hoursInfo" class="hours-info"></div>
+        </div>
+        
+        <div class="cta-buttons">
+            <a href="https://wa.me/213562542839?text=I want to book an appointment" class="btn btn-primary">
+                <i class="fas fa-calendar-plus"></i> Book Now
+            </a>
+            <a href="tel:+213562542839" class="btn btn-outline">
+                <i class="fas fa-phone"></i> Call Us
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function checkClinicAvailability() {
+            const now = new Date();
+            const currentDay = now.getDay(); // 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+            const currentTime = now.getHours() * 100 + now.getMinutes(); // Convert to HHMM format for easier comparison
+            
+            let isOpen = false;
+            let hoursText = '';
+            
+            switch(currentDay) {
+                case 1: // Monday
+                case 2: // Tuesday
+                case 3: // Wednesday
+                case 4: // Thursday
+                    isOpen = (currentTime >= 800 && currentTime <= 1800); // 08:00 to 18:00
+                    hoursText = 'Mon-Thu: 8:00 AM - 6:00 PM';
+                    break;
+                
+                case 6: // Saturday
+                    isOpen = (currentTime >= 900 && currentTime <= 1600); // 09:00 to 16:00
+                    hoursText = 'Saturday: 9:00 AM - 4:00 PM';
+                    break;
+                
+                case 0: // Sunday - Emergency Only (closed)
+                    isOpen = false;
+                    hoursText = 'Sunday: Emergency Only';
+                    break;
+                    
+                case 5: // Friday - Closed
+                    isOpen = false;
+                    hoursText = 'Friday: Closed';
+                    break;
+                
+                default:
+                    isOpen = false;
+                    hoursText = 'Closed';
+            }
+            
+            // Update the status display
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const hoursInfo = document.getElementById('hoursInfo');
+            
+            if (isOpen) {
+                statusDot.className = 'status-dot status-open';
+                statusText.className = 'status-text open';
+                statusText.textContent = 'We are open now';
+            } else {
+                statusDot.className = 'status-dot status-closed';
+                statusText.className = 'status-text closed';
+                statusText.textContent = 'We are closed now';
+            }
+            
+            hoursInfo.textContent = hoursText;
+        }
+        
+        // Check availability when page loads
+        document.addEventListener('DOMContentLoaded', checkClinicAvailability);
+        
+        // Update every minute
+        setInterval(checkClinicAvailability, 60000);
+    </script>
+</body>
+</html>

@@ -28,9 +28,14 @@ header('Content-Type: text/html; charset=UTF-8');
         integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
     <link href="css/templatemo-medic-care.css" rel="stylesheet">
     <link rel="stylesheet" href="css/check-appointment.css">
+    <style>
+        .checkhh {
+            background : #f8f9fa;
+        }
+    </style>
 </head>
 
-<body id="top">
+<body id="top" class="checkhh">
     <main>
         <?php include_once('includes/header.php'); ?>
 
