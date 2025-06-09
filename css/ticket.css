@@ -405,58 +405,55 @@ body {
     margin-left: 5px !important;
   }
 
-  /* Force black text for all content */
-  .ticket-card * {
-    color: black !important;
-    background: transparent !important;
+  /* Force single page print */
+  body {
+    height: 100vh !important;
+    overflow: hidden !important;
   }
 
-  /* Exception for colored elements */
-  .ticket-success-icon,
-  .appointment-number,
-  .clinic-address-print i {
-    color: #0099ff !important;
+  .ticket-section {
+    height: 100vh !important;
+    overflow: hidden !important;
+    page-break-after: avoid !important;
   }
 
-  /* Ensure proper page breaks */
   .ticket-card {
-    page-break-before: auto !important;
-    page-break-after: auto !important;
+    max-height: 90vh !important;
+    overflow: hidden !important;
+    page-break-inside: avoid !important;
+    page-break-after: avoid !important;
+    page-break-before: avoid !important;
+  }
+
+  /* Hide content that might cause page overflow */
+  .ticket-footer {
+    position: fixed !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    padding: 10px !important;
+  }
+
+  /* Ensure no page breaks */
+  * {
+    page-break-before: avoid !important;
+    page-break-after: avoid !important;
     page-break-inside: avoid !important;
   }
 
-  /* Hide wave images and decorative elements */
-  img[src*="wave"],
-  img[alt*="wave"],
-  img[src*="haikei"],
-  img[alt*="mamchatch"],
-  .wave,
-  .waves,
-  .wave-bottom,
-  .wave-top,
-  section img,
-  main img {
-    display: none !important;
-    visibility: hidden !important;
+  /* Force everything to fit on one page */
+  html,
+  body {
+    height: 100vh !important;
+    max-height: 100vh !important;
+    overflow: hidden !important;
   }
 
-  /* Hide any background images */
-  * {
-    background-image: none !important;
-  }
-
-  /* Specifically target the wave image at the bottom of pages */
-  img[src="images/assets/wave-haikei.svg"],
-  img[alt="mamchatch"] {
-    display: none !important;
-  }
-
-  /* Hide any decorative images in sections */
-  section > img,
-  main > img,
-  .container > img,
-  .row > img {
-    display: none !important;
+  /* Scale content to fit if necessary */
+  .ticket-card {
+    transform: scale(0.85) !important;
+    transform-origin: top center !important;
+    margin: 0 auto !important;
   }
 }
 
