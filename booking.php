@@ -236,7 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-telephone-fill"></i>
                                             </span>
-                                            <input type="tel" name="phone" id="phone" 
+                                            <input type="number" name="phone" id="phone" 
                                                 class="form-control <?php echo $invalid_phone ? 'is-invalid' : ''; ?>"
                                                 placeholder="<?php echo t('phone_placeholder'); ?>" 
                                                 value="<?php echo isset($_POST['phone']) ? htmlspecialchars($_POST['phone'], ENT_QUOTES, 'UTF-8') : ''; ?>" >
