@@ -283,7 +283,7 @@ header('Content-Type: text/html; charset=UTF-8');
                                                                 <i class="bi bi-telephone-fill"></i>
                                                                 <div>
                                                                     <span class="detail-label"><?php echo t('clinic_phone'); ?></span>
-                                                                    <span class="detail-value">05 62 54 28 39</span>
+                                                                    <span class="detail-value">0562542839</span>
                                                                 </div>
                                                             </div>
                                                             <div class="location-actions">
@@ -294,6 +294,10 @@ header('Content-Type: text/html; charset=UTF-8');
                                                                 <a href="tel:0562542839" class="location-btn">
                                                                     <i class="bi bi-telephone"></i>
                                                                     <?php echo t('call_clinic'); ?>
+                                                                </a>
+                                                                <a href="chat.php?id=<?php echo $row->ID; ?>" class="location-btn">
+                                                                  <i class="bi bi-chat-dots"></i>
+                                                                    <?php echo t('chat_with_doctor'); ?>
                                                                 </a>
                                                             </div>
                                                         </div>

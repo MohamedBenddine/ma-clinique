@@ -154,7 +154,7 @@ $isRTL = isRTL();
                         </div>
                         <div class="contact-details">
                             <h6><?php echo t('email'); ?></h6>
-                            <p>info@maclinique.dz<br>contact@maclinique.dz</p>
+                            <p>beneddinemohamed11@gmail.com<br>contact@maclinique.dz</p>
                         </div>
                     </div>
                     

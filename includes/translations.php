@@ -265,8 +265,76 @@ class Translation {
         'required_field' => ['en' => 'This field is required', 'ar' => 'هذا الحقل مطلوب'],
         'invalid_email' => ['en' => 'Please enter a valid email address', 'ar' => 'يرجى إدخال عنوان بريد إلكتروني صالح'],
         'invalid_phone' => ['en' => 'Please enter a valid phone number', 'ar' => 'يرجى إدخال رقم هاتف صالح'],
-        
-        // ... rest of existing translations ...
+
+        // Chat Section
+        'chat_title' => ['en' => 'Chat', 'ar' => 'دردشة'],
+        'chat_with_doctor' => ['en' => 'Chat with Doctor', 'ar' => 'الدردشة مع الطبيب'],
+        'type_message' => ['en' => 'Type your message...', 'ar' => 'اكتب رسالتك...'],
+        'no_messages_yet' => ['en' => 'No messages yet', 'ar' => 'لا توجد رسائل بعد'],
+        'start_conversation' => ['en' => 'Start a conversation', 'ar' => 'ابدأ محادثة'],
+        'online' => ['en' => 'Online', 'ar' => 'متصل'],
+        'appointment' => ['en' => 'Appointment', 'ar' => 'موعد'],
+        'appointment_time_label' => ['en' => 'Appointment Time', 'ar' => 'وقت الموعد'],
+        'select_time' => ['en' => 'Select Time', 'ar' => 'اختر الوقت'],
+        'time_09_00' => ['en' => '09:00 AM', 'ar' => '09:00 صباحاً'],
+        'time_09_30' => ['en' => '09:30 AM', 'ar' => '09:30 صباحاً'],
+        'time_10_00' => ['en' => '10:00 AM', 'ar' => '10:00 صباحاً'],
+        'time_10_30' => ['en' => '10:30 AM', 'ar' => '10:30 صباحاً'],
+        'time_11_00' => ['en' => '11:00 AM', 'ar' => '11:00 صباحاً'],
+        'time_11_30' => ['en' => '11:30 AM', 'ar' => '11:30 صباحاً'],
+        'time_12_00' => ['en' => '12:00 PM', 'ar' => '12:00 ظهراً'],
+        'time_14_00' => ['en' => '02:00 PM', 'ar' => '02:00 ظهراً'],
+        'time_14_30' => ['en' => '02:30 PM', 'ar' => '02:30 ظهراً'],
+        'time_15_00' => ['en' => '03:00 PM', 'ar' => '03:00 ظهراً'],
+        'time_15_30' => ['en' => '03:30 PM', 'ar' => '03:30 ظهراً'],
+        'time_16_00' => ['en' => '04:00 PM', 'ar' => '04:00 ظهراً'],
+        'time_16_30' => ['en' => '04:30 PM', 'ar' => '04:30 ظهراً'],
+        'time_17_00' => ['en' => '05:00 PM', 'ar' => '05:00 مساءً'],
+        'time_required' => ['en' => 'Appointment time is required.', 'ar' => 'وقت الموعد مطلوب.'],
+        'clinic_phone' => ['en' => 'Clinic Phone', 'ar' => 'هاتف العيادة'],
+
+
+
+
+        'connecting' => [
+            'en' => 'Connecting...',
+            'ar' => 'جاري الاتصال...',
+            'fr' => 'Connexion...'
+        ],
+        'connected' => [
+            'en' => 'Connected',
+            'ar' => 'متصل',
+            'fr' => 'Connecté'
+        ],
+        'disconnected' => [
+            'en' => 'Disconnected',
+            'ar' => 'غير متصل',
+            'fr' => 'Déconnecté'
+        ],
+        'doctor_online' => [
+            'en' => 'Doctor Online',
+            'ar' => 'الطبيب متصل',
+            'fr' => 'Médecin en ligne'
+        ],
+        'doctor_offline' => [
+            'en' => 'Doctor Offline',
+            'ar' => 'الطبيب غير متصل',
+            'fr' => 'Médecin hors ligne'
+        ],
+        'is_typing' => [
+            'en' => 'is typing',
+            'ar' => 'يكتب',
+            'fr' => 'tape'
+        ],
+
+        // New translations
+        'select_doctor_and_date_first' => ['en' => 'Please select doctor and date first', 'ar' => 'يرجى اختيار الطبيب والتاريخ أولاً'],
+        'loading_slots' => ['en' => 'Loading available slots', 'ar' => 'جاري تحميل الفترات المتاحة'],
+        'error_loading_slots' => ['en' => 'Error loading time slots', 'ar' => 'خطأ في تحميل فترات الوقت'],
+        'no_slots_available' => ['en' => 'No available slots for this date', 'ar' => 'لا توجد فترات متاحة لهذا التاريخ'],
+        'time_slot_booked' => ['en' => 'This time slot is already booked. Please select another time.', 'ar' => 'تم حجز هذه الفترة الزمنية بالفعل. يرجى اختيار وقت آخر.'],
+        'time_slot_fully_booked' => ['en' => 'This time slot is fully booked (maximum 3 appointments). Please select another time.', 'ar' => 'هذه الفترة الزمنية محجوزة بالكامل (بحد أقصى 3 مواعيد). يرجى اختيار وقت آخر.'],
+        'select_doctor_date_to_see_available_times' => ['en' => 'Select a doctor and date to see available time slots', 'ar' => 'اختر طبيبًا وتاريخًا لرؤية الفترات الزمنية المتاحة'],
     ];
     
     public static function get($key, $lang = null) { // Changed $lang default to null

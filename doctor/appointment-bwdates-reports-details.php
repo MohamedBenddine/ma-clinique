@@ -104,8 +104,12 @@ if($row->Status==''){
                                        echo htmlentities($row->Status);
                                      } ?></td>                
                  
-										<td><a href="view-appointment-detail.php?editid=<?php echo htmlentities ($row->ID);?>&&aptid=<?php echo htmlentities ($row->AppointmentNumber);?>" class="btn btn-primary">View</a></td>
-									</tr>
+				 <td><a href="view-appointment-detail.php?editid=<?php echo htmlentities ($row->ID);?>&&aptid=<?php echo htmlentities ($row->AppointmentNumber);?>" class="btn btn-primary">View</a>
+                                        <a href="chat-dashboard.php?open=<?php echo $row->ID; ?>" class="btn btn-info btn-sm">
+    <i class="bi bi-chat-dots"></i>
+    Chat with Patient
+</a>
+</td>									</tr>
 								 <?php $cnt=$cnt+1;}} ?> 
 	
 								</tbody>

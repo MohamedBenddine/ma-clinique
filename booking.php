@@ -26,6 +26,7 @@ $invalid_date = false;
 $invalid_specialization = false;
 $invalid_doctor = false;
 $invalid_user_type = false;
+$invalid_time = false; // New flag for time validation
 
 // Clear any previous ticket info from session
 unset($_SESSION['appointment_data']);
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $specialization = $_POST['specialization'] ?? '';
     $doctor = $_POST['doctor'] ?? '';
     $user_type = $_POST['user_type'] ?? '';
+    $appointment_time = $_POST['appointmenttime'] ?? ''; // New variable for appointment time
     
     // Ensure proper UTF-8 encoding
     $name = mb_convert_encoding($name, 'UTF-8', 'auto');
@@ -69,6 +71,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (empty($user_type)) {
         $invalid_user_type = true;
         $error = t('user_type_required');
+    } elseif (empty($appointment_time)) { // New validation for appointment time
+        $invalid_time = true;
+        $error = t('time_required');
     } else {
         // Date validation
         $today = date('Y-m-d');
@@ -77,41 +82,62 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = t('date_error');
         } else {
             try {
-                // Generate appointment number
-                $appointmentNumber = mt_rand(100000000, 999999999);
+                // Check if this time slot already has 3 bookings (maximum allowed)
+                // Count ALL bookings regardless of status (except Cancelled)
+                $check_sql = "SELECT COUNT(*) as count FROM tblappointment 
+                              WHERE Doctor = :doctor 
+                              AND AppointmentDate = :appointmentdate 
+                              AND AppointmentTime = :appointmenttime 
+                              AND Status IS NULL"; // Only count pending bookings
                 
-                // Insert into database
-                $sql = "INSERT INTO tblappointment (AppointmentNumber, Name, MobileNumber, Email, AppointmentDate, Specialization, Doctor, ApplyDate) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, NOW())";
+                $check_query = $dbh->prepare($check_sql);
+                $check_query->bindParam(':doctor', $doctor, PDO::PARAM_STR);
+                $check_query->bindParam(':appointmentdate', $date, PDO::PARAM_STR);
+                $check_query->bindParam(':appointmenttime', $appointment_time, PDO::PARAM_STR);
+                $check_query->execute();
+                $result = $check_query->fetch(PDO::FETCH_ASSOC);
                 
-                $stmt = $dbh->prepare($sql);
-                $result = $stmt->execute([
-                    $appointmentNumber,
-                    $name,
-                    $phone,
-                    $email,
-                    $date,
-                    $specialization,
-                    $doctor
-                ]);
-                
-                if ($result) {
-                    // Store appointment data in session for ticket
-                    $_SESSION['appointment_data'] = [
-                        'appointment_number' => $appointmentNumber,
-                        'name' => $name,
-                        'phone' => $phone,
-                        'email' => $email,
-                        'date' => $date,
-                        'specialization' => $specialization,
-                        'doctor' => $doctor
-                    ];
-                    
-                    // Redirect to ticket page
-                    header("Location: ticket.php");
-                    exit();
+                if($result['count'] >= 1) {
+                    $error = t('time_slot_fully_booked'); // Maximum 3 bookings reached
                 } else {
-                    $error = t('something_wrong');
+                    // Generate appointment number and proceed with booking
+                    $appointmentNumber = mt_rand(100000000, 999999999);
+                    
+                    // Insert into database (Status will be NULL initially - pending)
+                    $sql = "INSERT INTO tblappointment (AppointmentNumber, Name, MobileNumber, Email, AppointmentDate, Specialization, Doctor, ApplyDate, AppointmentTime) 
+                            VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), ?)";
+                    
+                    $stmt = $dbh->prepare($sql);
+                    $result = $stmt->execute([
+                        $appointmentNumber,
+                        $name,
+                        $phone,
+                        $email,
+                        $date,
+                        $specialization,
+                        $doctor,
+                        $appointment_time
+                    ]);
+                    
+                    if ($result) {
+                        // Store appointment data in session for ticket
+                        $_SESSION['appointment_data'] = [
+                            'appointment_number' => $appointmentNumber,
+                            'name' => $name,
+                            'phone' => $phone,
+                            'email' => $email,
+                            'date' => $date,
+                            'specialization' => $specialization,
+                            'doctor' => $doctor,
+                            'time' => $appointment_time
+                        ];
+                        
+                        // Redirect to ticket page
+                        header("Location: ticket.php");
+                        exit();
+                    } else {
+                        $error = t('something_wrong');
+                    }
                 }
                 
             } catch (Exception $e) {
@@ -119,6 +145,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
+}
+
+// Get available time slots for a specific doctor and date
+function getAvailableTimeSlots($doctor, $date, $dbh) {
+    // All possible time slots
+    $allSlots = [
+        '09:00:00' => '09:00 AM',
+        '09:30:00' => '09:30 AM',
+        '10:00:00' => '10:00 AM',
+        '10:30:00' => '10:30 AM',
+        '11:00:00' => '11:00 AM',
+        '11:30:00' => '11:30 AM',
+        '12:00:00' => '12:00 PM',
+        '14:00:00' => '02:00 PM',
+        '14:30:00' => '02:30 PM',
+        '15:00:00' => '03:00 PM',
+        '15:30:00' => '03:30 PM',
+        '16:00:00' => '04:00 PM',
+        '16:30:00' => '04:30 PM',
+        '17:00:00' => '05:00 PM'
+    ];
+    
+    // Get booked slots
+    $bookedSql = "SELECT AppointmentTime FROM tblappointment 
+                  WHERE Doctor = :doctor 
+                  AND AppointmentDate = :date";
+    
+    $bookedQuery = $dbh->prepare($bookedSql);
+    $bookedQuery->bindParam(':doctor', $doctor, PDO::PARAM_STR);
+    $bookedQuery->bindParam(':date', $date, PDO::PARAM_STR);
+    $bookedQuery->execute();
+    $bookedSlots = $bookedQuery->fetchAll(PDO::FETCH_COLUMN);
+    
+    // Remove booked slots from available slots
+    foreach($bookedSlots as $bookedTime) {
+        unset($allSlots[$bookedTime]);
+    }
+    
+    return $allSlots;
 }
 ?>
 <!DOCTYPE html>
@@ -269,7 +334,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </span>
                                             <input type="date" name="date" id="date" class="form-control <?php echo $invalid_date ? 'is-invalid' : ''; ?>" 
                                                 value="<?php echo isset($_POST['date']) ? $_POST['date'] : ''; ?>" 
-                                                min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" >
+                                                min="<?php echo date('Y-m-d', strtotime('+1 day')); ?>" 
+                                                onchange="loadAvailableSlots()">
                                         </div>
                                     </div>
 
@@ -309,7 +375,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <span class="input-group-icon">
                                                 <i class="bi bi-person-badge-fill"></i>
                                             </span>
-                                            <select name="doctor" id="doctor" class="form-control <?php echo $invalid_doctor ? 'is-invalid' : ''; ?>" >
+                                            <select name="doctor" id="doctor" class="form-control <?php echo $invalid_doctor ? 'is-invalid' : ''; ?>" onchange="loadAvailableSlots()">
                                                 <option value=""><?php echo t('select_doctor'); ?></option>
                                                 <?php if (isset($_POST['specialization']) && !empty($_POST['specialization'])): ?>
                                                     <?php
@@ -328,6 +394,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <?php endif; ?>
                                             </select>
                                         </div>
+                                    </div>
+
+                                    <!-- Appointment Time - New Field -->
+                                    <div class="form-group">
+                                        <label for="appointmenttime" class="form-label">
+                                            <?php echo t('appointment_time_label'); ?> <span class="required">*</span>
+                                        </label>
+                                        <div class="input-group">
+                                            <span class="input-group-icon">
+                                                <i class="bi bi-clock-fill"></i>
+                                            </span>
+                                            <select name="appointmenttime" id="appointmenttime" class="form-control <?php echo $invalid_time ? 'is-invalid' : ''; ?>">
+                                                <option value=""><?php echo t('select_doctor_and_date_first'); ?></option>
+                                                <!-- Time slots will be loaded dynamically via AJAX -->
+                                            </select>
+                                        </div>
+                                        <small class="text-muted"><?php echo t('select_doctor_date_to_see_available_times'); ?></small>
                                     </div>
                                 </div>
 
@@ -365,6 +448,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             if (!specializationId) {
                 doctorSelect.innerHTML = '<option value=""><?php echo t('select_doctor'); ?></option>';
+                // Clear time slots when specialization changes
+                document.getElementById('appointmenttime').innerHTML = '<option value=""><?php echo t('select_time'); ?></option>';
                 return;
             }
             
@@ -382,10 +467,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .then(response => response.text())
             .then(data => {
                 doctorSelect.innerHTML = data;
+                // Clear time slots when doctor list changes
+                document.getElementById('appointmenttime').innerHTML = '<option value=""><?php echo t('select_time'); ?></option>';
             })
             .catch(error => {
                 console.error('Error:', error);
                 doctorSelect.innerHTML = '<option value=""><?php echo t('error_loading_doctors'); ?></option>';
+            });
+        }
+        
+        // Load available time slots based on doctor and date
+        function loadAvailableSlots() {
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+            const timeSelect = document.getElementById('appointmenttime');
+            
+            if (!doctor || !date) {
+                timeSelect.innerHTML = '<option value=""><?php echo t('select_doctor_and_date'); ?></option>';
+                return;
+            }
+            
+            // Show loading
+            timeSelect.innerHTML = '<option value="">Loading available slots...</option>';
+            
+            // AJAX request to get available slots
+            fetch('get_available_slots.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                },
+                body: 'doctor=' + encodeURIComponent(doctor) + '&date=' + encodeURIComponent(date)
+            })
+            .then(response => response.json())
+            .then(data => {
+                timeSelect.innerHTML = '<option value=""><?php echo t('select_time'); ?></option>';
+                
+                if (data.error) {
+                    timeSelect.innerHTML = '<option value="">Error loading slots</option>';
+                    console.error('Error:', data.error);
+                } else if (Object.keys(data).length === 0) {
+                    timeSelect.innerHTML = '<option value="">No available slots for this date</option>';
+                } else {
+                    // Add available time slots
+                    for (const [time, display] of Object.entries(data)) {
+                        timeSelect.innerHTML += `<option value="${time}">${display}</option>`;
+                    }
+                }
+            })
+            .catch(error => {
+                timeSelect.innerHTML = '<option value="">Error loading slots</option>';
+                console.error('AJAX Error:', error);
             });
         }
         

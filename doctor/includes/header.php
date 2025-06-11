@@ -1,4 +1,3 @@
-
 <nav id="app-navbar" class="navbar navbar-inverse navbar-fixed-top primary">
   
   <!-- navbar header -->
@@ -93,3 +92,29 @@ foreach($results as $row)
     </div>
   </div><!-- navbar-container -->
 </nav>
+<script>
+// Add this to your header.php or main doctor layout
+function updateUnreadChatCount() {
+    fetch('api/unread-chat-count.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success && data.count > 0) {
+                const badge = document.getElementById('unreadChatCount');
+                if (badge) {
+                    badge.textContent = data.count;
+                    badge.style.display = 'inline';
+                }
+            } else {
+                const badge = document.getElementById('unreadChatCount');
+                if (badge) {
+                    badge.style.display = 'none';
+                }
+            }
+        })
+        .catch(error => console.error('Error fetching unread count:', error));
+}
+
+// Update unread count every 30 seconds
+setInterval(updateUnreadChatCount, 30000);
+document.addEventListener('DOMContentLoaded', updateUnreadChatCount);
+</script>

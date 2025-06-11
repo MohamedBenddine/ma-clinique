@@ -101,6 +101,12 @@ $fname=$row->FullName;
             <span class="menu-text">Report</span>
           </a>
         </li>
+        <li class="nav-item">
+    <a class="nav-link" href="chat-dashboard.php">
+        <i class="menu-icon zmdi zmdi-email zmdi-hc-lg"></i>
+        <span class="menu-text">Patient Chat</span>
+    </a>
+</li>
 
       </ul><!-- .app-menu -->
     </div><!-- .menubar-scroll-inner -->
