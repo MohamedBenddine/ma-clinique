@@ -127,6 +127,8 @@ $carouselDirection = $isRTL ? 'rtl' : 'ltr';
     <img src="images/assets/wave-haikei.svg" alt="mamchatch">
 </main>
 
+<?php include_once('includes/chat-widget.php'); ?>
+
     <?php include_once('includes/footer.php'); ?>
 
     <!-- JAVASCRIPT FILES -->

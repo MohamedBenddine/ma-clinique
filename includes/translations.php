@@ -161,7 +161,18 @@ class Translation {
         'send_message_btn' => ['en' => 'Send Message', 'ar' => 'إرسال الرسالة'],
         'message_sent' => ['en' => 'Message Sent Successfully!', 'ar' => 'تم إرسال الرسالة بنجاح!'],
         'message_sent_desc' => ['en' => 'Thank you for contacting us. We\'ll get back to you within 24 hours.', 'ar' => 'شكراً لتواصلك معنا. سنعاود الاتصال بك خلال 24 ساعة.'],
-        
+'ai_assistant' => [
+    'en' => 'AI Assistant',
+    'ar' => 'المساعد الذكي'
+],
+'welcome_message' => [
+    'en' => 'Hello! I\'m your medical assistant. How can I help you today?',
+    'ar' => 'مرحباً! أنا مساعدك الطبي. كيف يمكنني مساعدتك اليوم؟'
+],
+'type_message' => [
+    'en' => 'Type your message...',
+    'ar' => 'اكتب رسالتك...'
+],
         // About/Stats Section
         'professional_care' => ['en' => 'Professional Medical Care', 'ar' => 'رعاية طبية مهنية'],
         'emergency_services' => ['en' => '24/7 Emergency Services', 'ar' => 'خدمات طوارئ على مدار الساعة'],
